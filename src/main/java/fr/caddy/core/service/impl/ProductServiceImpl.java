@@ -112,7 +112,7 @@ public class ProductServiceImpl implements ProductService {
     /**
      * Calculate Consumptions with orders
      */
-    public List<Product> calculateConsumptions(List<Order> orders) {
+    public List<Product> calculateConsumptionsOfOrders(List<Order> orders) {
         final Map<Long, Product> productCalculate = new HashMap<>();
         for (Order order: orders) {
             for (ProductInstance productInstance : order.getProductInstances()) {
@@ -135,8 +135,12 @@ public class ProductServiceImpl implements ProductService {
                 }
             }
         }
+        return this.calculateConsumptions(productCalculate.values().stream().collect(Collectors.toList()));
+    }
+
+    public List<Product> calculateConsumptions(List<Product> products) {
         // calculate weeklyQuantity
-        for (Product product: productCalculate.values()) {
+        for (Product product: products) {
             final Map<Integer, Map<Integer, Float>> mapWeeklyQuantity = new HashMap<>();
             WeekFields weekFields = WeekFields.of(Locale.getDefault());
             for (DayQuantity dayQuantity : product.getConsumption().getDayQuantity()) {
@@ -171,8 +175,9 @@ public class ProductServiceImpl implements ProductService {
             // save it
             productDao.save(product);
         }
-        return productCalculate.values().stream().collect(Collectors.toList());
+        return products;
     }
+
     public void calculateAverage(List<Product> products) {
         for (Product product: products) {
             this.calculateAverage(product);

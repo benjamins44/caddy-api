@@ -32,7 +32,8 @@ public interface ProductService {
     /**
      * Calculate Consumptions with orders
      */
-    public List<Product> calculateConsumptions(List<Order> orders);
+    public List<Product> calculateConsumptionsOfOrders(List<Order> orders);
+    public List<Product> calculateConsumptions(List<Product> products);
 
     /**
      * Calculate Averages

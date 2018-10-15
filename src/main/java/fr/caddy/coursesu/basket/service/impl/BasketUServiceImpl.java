@@ -25,7 +25,7 @@ public class BasketUServiceImpl implements BasketUService {
 
             for (BasketPurchase basketPurchase : basketPurchases) {
                 ResultPage resultPage = welcomePage.search(basketPurchase.getIdProduct());
-                resultPage.addProduct( basketPurchase.getQuantity());
+                resultPage.addProduct(basketPurchase.getQuantity());
             }
             driver.quit();
         } catch (Exception e) {

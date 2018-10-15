@@ -11,7 +11,7 @@ public class BasketPurchase {
 
     private String label;
 
-    private Long quantity;
+    private Float quantity;
 
     private String sign;
 
@@ -31,11 +31,11 @@ public class BasketPurchase {
         this.idProduct = idProduct;
     }
 
-    public Long getQuantity() {
+    public Float getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(Long quantity) {
+    public void setQuantity(Float quantity) {
         this.quantity = quantity;
     }
 

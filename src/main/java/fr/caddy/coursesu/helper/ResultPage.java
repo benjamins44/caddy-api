@@ -22,7 +22,7 @@ public class ResultPage {
         this.wait = wait;
     }
 
-    public void addProduct(Long quantity) {
+    public void addProduct(Float quantity) {
         Long current = 0L;
         try {
             final WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(PATH_PRODUCT_MODAL)));
