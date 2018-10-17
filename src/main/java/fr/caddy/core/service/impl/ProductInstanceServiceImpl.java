@@ -155,4 +155,18 @@ public class ProductInstanceServiceImpl implements ProductInstanceService {
             productService.refreshProductInstance(productInstance);
         }
     }
+
+    @Override
+    public List<ProductInstance> getAll() {
+        return productInstanceDao.findAll();
+    }
+
+    /**
+     * Return all products instance like label
+     * @return
+     */
+    @Override
+    public List<ProductInstance> getByLabeLike(String label) {
+        return productInstanceDao.findByLabelContainingIgnoreCase(label);
+    }
 }
