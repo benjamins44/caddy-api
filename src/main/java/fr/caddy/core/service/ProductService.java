@@ -21,6 +21,36 @@ public interface ProductService {
 
     public List<Product> getAll();
 
+    /**
+     * Return all products like label
+     * @return
+     */
+    public List<Product> getByLabelLike(String label);
+
+    /**
+     * Get product by id
+     * @param id
+     * @return
+     */
+    public Product getById(Long id);
+
+    /**
+     * Update Product
+     * @param product
+     */
+    public Product update(Product product);
+
+    /**
+     * Create productInstance
+     * @param product
+     */
+    public Product create(Product product);
+    /**
+     * Delete productInstance
+     * @param product
+     */
+    public void delete(Product product);
+
 
     public void save(List<Product> products);
 

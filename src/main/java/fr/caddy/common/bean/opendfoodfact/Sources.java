@@ -1,5 +1,6 @@
 /* Copyright 2018 freecodeformat.com */
 package fr.caddy.common.bean.opendfoodfact;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
@@ -9,7 +10,7 @@ public class Sources {
     private List<String> images;
     private String url;
     private String id;
-    @SerializedName("import_t")
+    @JsonProperty("import_t")
     private int importT;
     private List<String> fields;
     public void setImages(List<String> images) {

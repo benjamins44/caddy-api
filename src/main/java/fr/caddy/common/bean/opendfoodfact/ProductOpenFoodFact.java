@@ -1,7 +1,7 @@
 /* Copyright 2018 freecodeformat.com */
 package fr.caddy.common.bean.opendfoodfact;
 
-import com.google.gson.annotations.SerializedName;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /* Time: 2018-10-07 17:37:11 @author freecodeformat.com @website http://www.freecodeformat.com/json2javabean.php */
 public class ProductOpenFoodFact {
@@ -9,7 +9,7 @@ public class ProductOpenFoodFact {
     private Product product;
     private String code;
     private int status;
-    @SerializedName("status_verbose")
+    @JsonProperty("status_verbose")
     private String statusVerbose;
     public void setProduct(Product product) {
          this.product = product;

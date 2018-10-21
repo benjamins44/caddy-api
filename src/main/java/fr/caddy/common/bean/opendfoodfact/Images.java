@@ -1,6 +1,7 @@
 /* Copyright 2018 freecodeformat.com */
 package fr.caddy.common.bean.opendfoodfact;
-import com.google.gson.annotations.SerializedName;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /* Time: 2018-10-07 17:37:11 @author freecodeformat.com @website http://www.freecodeformat.com/json2javabean.php */
 public class Images {
@@ -8,11 +9,11 @@ public class Images {
 
     private Front front;
     private Nutrition nutrition;
-    @SerializedName("front_fr")
+    @JsonProperty("front_fr")
     private FrontFr frontFr;
-    @SerializedName("ingredients_fr")
+    @JsonProperty("ingredients_fr")
     private IngredientsFr ingredientsFr;
-    @SerializedName("nutrition_fr")
+    @JsonProperty("nutrition_fr")
     private NutritionFr nutritionFr;
     private Ingredients ingredients;
 

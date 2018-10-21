@@ -1,13 +1,14 @@
 /* Copyright 2018 freecodeformat.com */
 package fr.caddy.common.bean.opendfoodfact;
-import com.google.gson.annotations.SerializedName;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /* Time: 2018-10-07 17:37:11 @author freecodeformat.com @website http://www.freecodeformat.com/json2javabean.php */
 public class IngredientsFr {
 
     private String rev;
     private String geometry;
-    @SerializedName("white_magic")
+    @JsonProperty("white_magic")
     private String whiteMagic;
     private String imgid;
     private Sizes sizes;

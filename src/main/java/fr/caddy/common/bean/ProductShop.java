@@ -9,6 +9,7 @@ public class ProductShop {
     private String name;
     private Double price;
     private String url;
+    private String ticketLabel;
 
     public Long getId() {
         return id;
@@ -52,10 +53,17 @@ public class ProductShop {
         this.url = url;
     }
 
+    public String getTicketLabel() {
+        return ticketLabel;
+    }
+    public void setTicketLabel(String ticketLabel) {
+        this.ticketLabel = ticketLabel;
+    }
+
     @Override
     public String toString() {
         return String.format(
-                "ProductShop[id=%s, label='%s', sign='%s', name='%s', price=%s, url='%s' ]",
-                id, label, sign, name, price, url);    }
+                "ProductShop[id=%s, label='%s', sign='%s', name='%s', price=%s, url='%s', ticketLabel='%s' ]",
+                id, label, sign, name, price, url, ticketLabel);    }
 
 }

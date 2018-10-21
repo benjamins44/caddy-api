@@ -1,6 +1,7 @@
 
 package fr.caddy.common.bean;
 
+import fr.caddy.common.constants.Constants;
 import org.springframework.data.annotation.Id;
 
 import java.util.List;
@@ -20,7 +21,7 @@ public class ProductInstance {
     private Integer nova;
     private String nutriscore;
     private Float quantity;
-    private String unit;
+    private String unit = Constants.DEFAULT_UNIT;
     private String image;
     private List<ProductShop> productShops = null;
     private Integer unitWeight;

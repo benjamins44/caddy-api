@@ -88,6 +88,33 @@ public class ProductServiceImpl implements ProductService {
         return productDao.findAll();
     }
 
+    @Override
+    public List<Product> getByLabelLike(String label) {
+        return productDao.findByLabelContainingIgnoreCase(label);
+    }
+
+    @Override
+    public Product getById(Long id) {
+        return this.productDao.findById(id).get();
+    }
+
+    @Override
+    public Product update(Product product) {
+        return this.productDao.save(product);
+    }
+
+    @Override
+    public Product create(Product product) {
+        // generate id
+        product.setId(counterDao.getNextSequence(Product.COLLECTION_NAME));
+        return this.productDao.save(product);
+    }
+
+    @Override
+    public void delete(Product product) {
+        this.productDao.delete(product);
+    }
+
     public void save(List<Product> products) {
         for (Product product: products) {
             this.productDao.save(product);

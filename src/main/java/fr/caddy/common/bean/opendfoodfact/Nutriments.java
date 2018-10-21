@@ -1,125 +1,126 @@
 /* Copyright 2018 freecodeformat.com */
 package fr.caddy.common.bean.opendfoodfact;
-import com.google.gson.annotations.SerializedName;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /* Time: 2018-10-07 17:37:11 @author freecodeformat.com @website http://www.freecodeformat.com/json2javabean.php */
 public class Nutriments {
 
     private double saturatedFat;
-    @SerializedName("vitaminD_value")
+    @JsonProperty("vitaminD_value")
     private String vitaminDValue;
-    @SerializedName("novaGroup_serving")
+    @JsonProperty("novaGroup_serving")
     private String novaGroupServing;
-    @SerializedName("energy_value")
+    @JsonProperty("energy_value")
     private String energyValue;
     private double fiber;
-    @SerializedName("saturatedFat_100g")
+    @JsonProperty("saturatedFat_100g")
     private double saturatedFat100g;
     private double salt;
     private double fat;
-    @SerializedName("energy_serving")
+    @JsonProperty("energy_serving")
     private String energyServing;
-    @SerializedName("calcium_value")
+    @JsonProperty("calcium_value")
     private String calciumValue;
-    @SerializedName("calcium_serving")
+    @JsonProperty("calcium_serving")
     private double calciumServing;
-    @SerializedName("sugars_value")
+    @JsonProperty("sugars_value")
     private String sugarsValue;
-    @SerializedName("fat_value")
+    @JsonProperty("fat_value")
     private String fatValue;
-    @SerializedName("nutritionDcoreFr_100g")
+    @JsonProperty("nutritionDcoreFr_100g")
     private String nutritionDcoreFr100g;
-    @SerializedName("novaGroup_100g")
+    @JsonProperty("novaGroup_100g")
     private String novaGroup100g;
-    @SerializedName("sugars_unit")
+    @JsonProperty("sugars_unit")
     private String sugarsUnit;
-    @SerializedName("salt_serving")
+    @JsonProperty("salt_serving")
     private double saltServing;
-    @SerializedName("fat_serving")
+    @JsonProperty("fat_serving")
     private double fatServing;
     private double carbohydrates;
-    @SerializedName("sodium_value")
+    @JsonProperty("sodium_value")
     private String sodiumValue;
-    @SerializedName("calcium_100g")
+    @JsonProperty("calcium_100g")
     private double calcium100g;
     private String nutritionDcoreFr;
     private double vitaminD;
     private double proteins;
-    @SerializedName("fiber_value")
+    @JsonProperty("fiber_value")
     private String fiberValue;
-    @SerializedName("carbohydrates_value")
+    @JsonProperty("carbohydrates_value")
     private String carbohydratesValue;
-    @SerializedName("sodium_serving")
+    @JsonProperty("sodium_serving")
     private double sodiumServing;
     private double calcium;
-    @SerializedName("saturatedFat_serving")
+    @JsonProperty("saturatedFat_serving")
     private double saturatedFatServing;
-    @SerializedName("nutritionDcoreUk_100g")
+    @JsonProperty("nutritionDcoreUk_100g")
     private String nutritionDcoreUk100g;
-    @SerializedName("energy_100g")
+    @JsonProperty("energy_100g")
     private String energy100g;
     private double sodium;
-    @SerializedName("vitaminD_serving")
+    @JsonProperty("vitaminD_serving")
     private double vitaminDServing;
-    @SerializedName("fiber_100g")
+    @JsonProperty("fiber_100g")
     private double fiber100g;
-    @SerializedName("fat_unit")
+    @JsonProperty("fat_unit")
     private String fatUnit;
-    @SerializedName("vitaminD_label")
+    @JsonProperty("vitaminD_label")
     private String vitaminDLabel;
-    @SerializedName("fat_100g")
+    @JsonProperty("fat_100g")
     private double fat100g;
-    @SerializedName("proteins_value")
+    @JsonProperty("proteins_value")
     private String proteinsValue;
     private String novaGroup;
-    @SerializedName("saturatedFat_value")
+    @JsonProperty("saturatedFat_value")
     private String saturatedFatValue;
-    @SerializedName("saturatedFat_unit")
+    @JsonProperty("saturatedFat_unit")
     private String saturatedFatUnit;
-    @SerializedName("calcium_unit")
+    @JsonProperty("calcium_unit")
     private String calciumUnit;
-    @SerializedName("proteins_100g")
+    @JsonProperty("proteins_100g")
     private double proteins100g;
-    @SerializedName("salt_value")
+    @JsonProperty("salt_value")
     private String saltValue;
-    @SerializedName("salt_unit")
+    @JsonProperty("salt_unit")
     private String saltUnit;
     private String energy;
-    @SerializedName("fiber_modifier")
+    @JsonProperty("fiber_modifier")
     private String fiberModifier;
-    @SerializedName("proteins_unit")
+    @JsonProperty("proteins_unit")
     private String proteinsUnit;
     private double sugars;
-    @SerializedName("sugars_serving")
+    @JsonProperty("sugars_serving")
     private double sugarsServing;
-    @SerializedName("fiber_unit")
+    @JsonProperty("fiber_unit")
     private String fiberUnit;
-    @SerializedName("salt_100g")
+    @JsonProperty("salt_100g")
     private double salt100g;
     private String nutritionDcoreUk;
-    @SerializedName("fiber_serving")
+    @JsonProperty("fiber_serving")
     private double fiberServing;
-    @SerializedName("sugars_100g")
+    @JsonProperty("sugars_100g")
     private double sugars100g;
-    @SerializedName("sodium_unit")
+    @JsonProperty("sodium_unit")
     private String sodiumUnit;
-    @SerializedName("energy_unit")
+    @JsonProperty("energy_unit")
     private String energyUnit;
-    @SerializedName("carbohydrates_unit")
+    @JsonProperty("carbohydrates_unit")
     private String carbohydratesUnit;
-    @SerializedName("proteins_serving")
+    @JsonProperty("proteins_serving")
     private double proteinsServing;
-    @SerializedName("carbohydrates_serving")
+    @JsonProperty("carbohydrates_serving")
     private double carbohydratesServing;
-    @SerializedName("calcium_label")
+    @JsonProperty("calcium_label")
     private String calciumLabel;
-    @SerializedName("carbohydrates_100g")
+    @JsonProperty("carbohydrates_100g")
     private double carbohydrates100g;
-    @SerializedName("vitaminD_unit")
+    @JsonProperty("vitaminD_unit")
     private String vitaminDUnit;
-    @SerializedName("sodium_100g")
+    @JsonProperty("sodium_100g")
     private double sodium100g;
-    @SerializedName("vitaminD_100g")
+    @JsonProperty("vitaminD_100g")
     private double vitaminD100g;
     public void setSaturatedFat(double saturatedFat) {
          this.saturatedFat = saturatedFat;

@@ -79,14 +79,14 @@ public class ProductInstanceServiceImpl implements ProductInstanceService {
         // get open food fact product
         if (productInstance.getOpenFoodFactId() != null) {
             LOG.info(String.format("Refresh %s productInstanceId with %s openFoodFactId", productInstance.getId(), productInstance.getOpenFoodFactId()));
+
             ProductOpenFoodFact productOpen = openFoodFactService.getById(productInstance.getOpenFoodFactId());
-            LOG.info(productOpen.toString());
-            // label
+            /*// label
             if (!StringUtils.isEmpty(productOpen.getProduct().getProductName())
                 && !productOpen.getProduct().getProductName().equals(productInstance.getLabel())) {
                 productInstance.setLabel(productOpen.getProduct().getProductName());
                 result++;
-            }
+            }*/
             // category
             if (!StringUtils.isEmpty(productOpen.getProduct().getCategories())
                 && !productOpen.getProduct().getCategories().equals(productInstance.getCategory())) {
@@ -113,25 +113,31 @@ public class ProductInstanceServiceImpl implements ProductInstanceService {
             }
             // unit weight
             if (productOpen.getProduct().getServingQuantity() > 0
-                && productOpen.getProduct().getServingQuantity() != productInstance.getUnitWeight()) {
+                 && (productInstance.getUnitWeight() == null ||
+                     productOpen.getProduct().getServingQuantity() != productInstance.getUnitWeight())) {
                 productInstance.setUnitWeight(Integer.valueOf(productOpen.getProduct().getServingQuantity()));
                 result++;
             }
             // total weight
             if (productOpen.getProduct().getProductQuantity() > 0
-                && productOpen.getProduct().getProductQuantity() != productInstance.getUnitWeight()) {
+                && (productInstance.getUnitWeight() == null ||
+                    productOpen.getProduct().getProductQuantity() != productInstance.getUnitWeight())) {
                 productInstance.setTotalWeight(productOpen.getProduct().getProductQuantity());
                 result++;
             }
             // unit
             if (!StringUtils.isEmpty(productOpen.getProduct().getServingSize())
                 && !productOpen.getProduct().getServingSize().equals(productInstance.getUnit())) {
-                productInstance.setUnit(productOpen.getProduct().getServingSize().split(" ")[1]);
+                final String[] servingSize = productOpen.getProduct().getServingSize().split(" ");
+                if (servingSize != null && servingSize.length > 1) {
+                    productInstance.setUnit(servingSize[1]);
+                }
                 result++;
             }
             // unit count
-            if (productInstance.getTotalWeight() > 0 && productInstance.getUnitWeight() > 0
-                && (productInstance.getTotalWeight() / productInstance.getUnitWeight()) != productInstance.getUnitCount()) {
+            if (productInstance.getTotalWeight() != null && productInstance.getUnitWeight() != null &&
+                    (productInstance.getUnitCount() == null ||
+                    (productInstance.getTotalWeight() / productInstance.getUnitWeight()) != productInstance.getUnitCount())) {
                 productInstance.setUnitCount(productInstance.getTotalWeight() / productInstance.getUnitWeight());
                 result++;
             }
@@ -161,6 +167,12 @@ public class ProductInstanceServiceImpl implements ProductInstanceService {
         return productInstanceDao.findAll();
     }
 
+    @Override
+    public ProductInstance getById(Long id) {
+        System.out.println("id:" + id);
+        return productInstanceDao.findById(id).get();
+    }
+
     /**
      * Return all products instance like label
      * @return
@@ -168,5 +180,24 @@ public class ProductInstanceServiceImpl implements ProductInstanceService {
     @Override
     public List<ProductInstance> getByLabeLike(String label) {
         return productInstanceDao.findByLabelContainingIgnoreCase(label);
+    }
+
+    @Override
+    public ProductInstance update(ProductInstance productInstance) {
+        productInstanceDao.save(productInstance);
+        return productInstance;
+    }
+
+    @Override
+    public ProductInstance create(ProductInstance productInstance) {
+        // generate id
+        productInstance.setId(counterDao.getNextSequence(ProductInstance.COLLECTION_NAME));
+        productInstanceDao.save(productInstance);
+        return productInstance;
+    }
+
+    @Override
+    public void delete(ProductInstance productInstance) {
+        productInstanceDao.delete(productInstance);
     }
 }

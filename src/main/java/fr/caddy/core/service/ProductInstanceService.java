@@ -36,4 +36,28 @@ public interface ProductInstanceService {
      */
     public List<ProductInstance> getByLabeLike(String label);
 
+    /**
+     * Get products instance by id
+     * @param id
+     * @return
+     */
+    public ProductInstance getById(Long id);
+
+    /**
+     * Update productInstance
+     * @param productInstance
+     */
+    public ProductInstance update(ProductInstance productInstance);
+
+    /**
+     * Create productInstance
+     * @param productInstance
+     */
+    public ProductInstance create(ProductInstance productInstance);
+    /**
+     * Delete productInstance
+     * @param productInstance
+     */
+    public void delete(ProductInstance productInstance);
+
 }

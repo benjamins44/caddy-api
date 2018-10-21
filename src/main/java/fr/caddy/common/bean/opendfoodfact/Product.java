@@ -1,354 +1,354 @@
 /* Copyright 2018 freecodeformat.com */
 package fr.caddy.common.bean.opendfoodfact;
 
-import com.google.gson.annotations.SerializedName;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
 /* Time: 2018-10-07 17:37:11 @author freecodeformat.com @website http://www.freecodeformat.com/json2javabean.php */
 public class Product {
 
-    @SerializedName("ingredients_n_tags")
+    @JsonProperty("ingredients_n_tags")
     private List<String> ingredientsNTags;
-    @SerializedName("product_name")
+    @JsonProperty("product_name")
     private String productName;
-    @SerializedName("image_nutrition_url")
+    @JsonProperty("image_nutrition_url")
     private String imageNutritionUrl;
-    @SerializedName("image_front_url")
+    @JsonProperty("image_front_url")
     private String imageFrontUrl;
-    @SerializedName("manufacturing_places_tags")
+    @JsonProperty("manufacturing_places_tags")
     private List<String> manufacturingPlacesTags;
-    @SerializedName("emb_codes_debug_tags")
+    @JsonProperty("emb_codes_debug_tags")
     private List<String> embCodesDebugTags;
-    @SerializedName("additives_old_n")
+    @JsonProperty("additives_old_n")
     private int additivesOldN;
-    @SerializedName("nucleotides_prev_tags")
+    @JsonProperty("nucleotides_prev_tags")
     private List<String> nucleotidesPrevTags;
-    @SerializedName("purchase_places")
+    @JsonProperty("purchase_places")
     private String purchasePlaces;
-    @SerializedName("nutrition_score_debug")
+    @JsonProperty("nutrition_score_debug")
     private String nutritionScoreDebug;
-    @SerializedName("languages_hierarchy")
+    @JsonProperty("languages_hierarchy")
     private List<String> languagesHierarchy;
-    @SerializedName("created_t")
+    @JsonProperty("created_t")
     private int createdT;
-    @SerializedName("max_imgid")
+    @JsonProperty("max_imgid")
     private String maxImgid;
-    @SerializedName("packaging_tags")
+    @JsonProperty("packaging_tags")
     private List<String> packagingTags;
-    @SerializedName("informers_tags")
+    @JsonProperty("informers_tags")
     private List<String> informersTags;
-    @SerializedName("categories_prev_hierarchy")
+    @JsonProperty("categories_prev_hierarchy")
     private List<String> categoriesPrevHierarchy;
-    @SerializedName("ingredients_hierarchy")
+    @JsonProperty("ingredients_hierarchy")
     private List<String> ingredientsHierarchy;
-    @SerializedName("cities_tags")
+    @JsonProperty("cities_tags")
     private List<String> citiesTags;
-    @SerializedName("image_nutrition_small_url")
+    @JsonProperty("image_nutrition_small_url")
     private String imageNutritionSmallUrl;
-    @SerializedName("nutrient_levels_tags")
+    @JsonProperty("nutrient_levels_tags")
     private List<String> nutrientLevelsTags;
     private String code;
-    @SerializedName("entry_dates_tags")
+    @JsonProperty("entry_dates_tags")
     private List<String> entryDatesTags;
-    @SerializedName("traces_hierarchy")
+    @JsonProperty("traces_hierarchy")
     private List<String> tracesHierarchy;
-    @SerializedName("additives_prev_tags")
+    @JsonProperty("additives_prev_tags")
     private List<String> additivesPrevTags;
-    @SerializedName("nutrition_data_per_debug_tags")
+    @JsonProperty("nutrition_data_per_debug_tags")
     private List<String> nutritionDataPerDebugTags;
     private String countries;
-    @SerializedName("nova_group_debug")
+    @JsonProperty("nova_group_debug")
     private String novaGroupDebug;
     private String lang;
-    @SerializedName("serving_size_debug_tags")
+    @JsonProperty("serving_size_debug_tags")
     private List<String> servingSizeDebugTags;
-    @SerializedName("brands_tags")
+    @JsonProperty("brands_tags")
     private List<String> brandsTags;
-    @SerializedName("photographers_tags")
+    @JsonProperty("photographers_tags")
     private List<String> photographersTags;
-    @SerializedName("generic_name_fr")
+    @JsonProperty("generic_name_fr")
     private String genericNameFr;
-    @SerializedName("stores_tags")
+    @JsonProperty("stores_tags")
     private List<String> storesTags;
-    @SerializedName("link_debug_tags")
+    @JsonProperty("link_debug_tags")
     private List<String> linkDebugTags;
-    @SerializedName("minerals_prev_tags")
+    @JsonProperty("minerals_prev_tags")
     private List<String> mineralsPrevTags;
-    @SerializedName("nova_groups_tags")
+    @JsonProperty("nova_groups_tags")
     private List<String> novaGroupsTags;
-    @SerializedName("nova_group")
+    @JsonProperty("nova_group")
     private String novaGroup;
-    @SerializedName("nucleotides_tags")
+    @JsonProperty("nucleotides_tags")
     private List<String> nucleotidesTags;
-    @SerializedName("no_nutrition_data")
+    @JsonProperty("no_nutrition_data")
     private String noNutritionData;
-    @SerializedName("expiration_date_debug_tags")
+    @JsonProperty("expiration_date_debug_tags")
     private List<String> expirationDateDebugTags;
-    @SerializedName("languages_codes")
+    @JsonProperty("languages_codes")
     private LanguagesCodes languagesCodes;
-    @SerializedName("ingredients_ids_debug")
+    @JsonProperty("ingredients_ids_debug")
     private List<String> ingredientsIdsDebug;
-    @SerializedName("image_url")
+    @JsonProperty("image_url")
     private String imageUrl;
-    @SerializedName("ingredients_text_with_allergens_fr")
+    @JsonProperty("ingredients_text_with_allergens_fr")
     private String ingredientsTextWithAllergensFr;
     private List<Sources> sources;
-    @SerializedName("quantity_debug_tags")
+    @JsonProperty("quantity_debug_tags")
     private List<String> quantityDebugTags;
-    @SerializedName("serving_size")
+    @JsonProperty("serving_size")
     private String servingSize;
-    @SerializedName("nutrition_score_warning_no_fruits_vegetables_nuts")
+    @JsonProperty("nutrition_score_warning_no_fruits_vegetables_nuts")
     private int nutritionScoreWarningNoFruitsVegetablesNuts;
-    @SerializedName("ingredients_text_fr_debug_tags")
+    @JsonProperty("ingredients_text_fr_debug_tags")
     private List<String> ingredientsTextFrDebugTags;
-    @SerializedName("nutrition_grade_fr")
+    @JsonProperty("nutrition_grade_fr")
     private String nutritionGradeFr;
-    @SerializedName("generic_name")
+    @JsonProperty("generic_name")
     private String genericName;
-    @SerializedName("editors_tags")
+    @JsonProperty("editors_tags")
     private List<String> editorsTags;
-    @SerializedName("additives_old_tags")
+    @JsonProperty("additives_old_tags")
     private List<String> additivesOldTags;
-    @SerializedName("additives_debug_tags")
+    @JsonProperty("additives_debug_tags")
     private List<String> additivesDebugTags;
-    @SerializedName("product_name_fr_debug_tags")
+    @JsonProperty("product_name_fr_debug_tags")
     private List<String> productNameFrDebugTags;
-    @SerializedName("categories_prev_tags")
+    @JsonProperty("categories_prev_tags")
     private List<String> categoriesPrevTags;
     private String allergens;
-    @SerializedName("countries_hierarchy")
+    @JsonProperty("countries_hierarchy")
     private List<String> countriesHierarchy;
-    @SerializedName("quality_tags")
+    @JsonProperty("quality_tags")
     private List<String> qualityTags;
-    @SerializedName("ingredients_that_may_be_from_palm_oil_n")
+    @JsonProperty("ingredients_that_may_be_from_palm_oil_n")
     private int ingredientsThatMayBeFromPalmOilN;
-    @SerializedName("emb_codes_tags")
+    @JsonProperty("emb_codes_tags")
     private List<String> embCodesTags;
-    @SerializedName("last_image_dates_tags")
+    @JsonProperty("last_image_dates_tags")
     private List<String> lastImageDatesTags;
-    @SerializedName("additives_prev_original_tags")
+    @JsonProperty("additives_prev_original_tags")
     private List<String> additivesPrevOriginalTags;
-    @SerializedName("brands_debug_tags")
+    @JsonProperty("brands_debug_tags")
     private List<String> brandsDebugTags;
-    @SerializedName("states_hierarchy")
+    @JsonProperty("states_hierarchy")
     private List<String> statesHierarchy;
-    @SerializedName("nutrition_grades")
+    @JsonProperty("nutrition_grades")
     private String nutritionGrades;
-    @SerializedName("nutrient_levels")
+    @JsonProperty("nutrient_levels")
     private NutrientLevels nutrientLevels;
-    @SerializedName("traces_tags")
+    @JsonProperty("traces_tags")
     private List<String> tracesTags;
     private String additives;
-    @SerializedName("new_additives_n")
+    @JsonProperty("new_additives_n")
     private int newAdditivesN;
-    @SerializedName("labels_prev_tags")
+    @JsonProperty("labels_prev_tags")
     private List<String> labelsPrevTags;
     private String origins;
-    @SerializedName("ingredients_text_fr")
+    @JsonProperty("ingredients_text_fr")
     private String ingredientsTextFr;
     private String brands;
-    @SerializedName("pnns_groups_2")
+    @JsonProperty("pnns_groups_2")
     private String pnnsGroups2;
-    @SerializedName("image_small_url")
+    @JsonProperty("image_small_url")
     private String imageSmallUrl;
-    @SerializedName("vitamins_prev_tags")
+    @JsonProperty("vitamins_prev_tags")
     private List<String> vitaminsPrevTags;
-    @SerializedName("last_modified_t")
+    @JsonProperty("last_modified_t")
     private int lastModifiedT;
-    @SerializedName("misc_tags")
+    @JsonProperty("misc_tags")
     private List<String> miscTags;
-    @SerializedName("labels_debug_tags")
+    @JsonProperty("labels_debug_tags")
     private List<String> labelsDebugTags;
-    @SerializedName("image_ingredients_thumb_url")
+    @JsonProperty("image_ingredients_thumb_url")
     private String imageIngredientsThumbUrl;
     private List<String> editors;
     private String labels;
     private String packaging;
-    @SerializedName("lang_debug_tags")
+    @JsonProperty("lang_debug_tags")
     private List<String> langDebugTags;
-    @SerializedName("selected_images")
+    @JsonProperty("selected_images")
     private SelectedImages selectedImages;
     private String creator;
     private List<Ingredients> ingredients;
-    @SerializedName("additives_prev_n")
+    @JsonProperty("additives_prev_n")
     private int additivesPrevN;
-    @SerializedName("purchase_places_tags")
+    @JsonProperty("purchase_places_tags")
     private List<String> purchasePlacesTags;
-    @SerializedName("pnns_groups_1")
+    @JsonProperty("pnns_groups_1")
     private String pnnsGroups1;
-    @SerializedName("scans_n")
+    @JsonProperty("scans_n")
     private int scansN;
-    @SerializedName("ingredients_tags")
+    @JsonProperty("ingredients_tags")
     private List<String> ingredientsTags;
-    @SerializedName("allergens_tags")
+    @JsonProperty("allergens_tags")
     private List<String> allergensTags;
     private String id;
-    @SerializedName("traces_from_ingredients")
+    @JsonProperty("traces_from_ingredients")
     private String tracesFromIngredients;
-    @SerializedName("pnns_groups_1_tags")
+    @JsonProperty("pnns_groups_1_tags")
     private List<String> pnnsGroups1Tags;
-    @SerializedName("states_tags")
+    @JsonProperty("states_tags")
     private List<String> statesTags;
-    @SerializedName("image_ingredients_small_url")
+    @JsonProperty("image_ingredients_small_url")
     private String imageIngredientsSmallUrl;
-    @SerializedName("labels_prev_hierarchy")
+    @JsonProperty("labels_prev_hierarchy")
     private List<String> labelsPrevHierarchy;
     private String traces;
-    @SerializedName("origins_tags")
+    @JsonProperty("origins_tags")
     private List<String> originsTags;
     private String stores;
-    @SerializedName("ingredients_that_may_be_from_palm_oil_tags")
+    @JsonProperty("ingredients_that_may_be_from_palm_oil_tags")
     private List<String> ingredientsThatMayBeFromPalmOilTags;
-    @SerializedName("expiration_date")
+    @JsonProperty("expiration_date")
     private String expirationDate;
-    @SerializedName("generic_name_fr_debug_tags")
+    @JsonProperty("generic_name_fr_debug_tags")
     private List<String> genericNameFrDebugTags;
-    @SerializedName("amino_acids_prev_tags")
+    @JsonProperty("amino_acids_prev_tags")
     private List<String> aminoAcidsPrevTags;
-    @SerializedName("_keywords")
+    @JsonProperty("_keywords")
     private List<String> Keywords;
     private int complete;
-    @SerializedName("manufacturing_places")
+    @JsonProperty("manufacturing_places")
     private String manufacturingPlaces;
-    @SerializedName("ingredients_debug")
+    @JsonProperty("ingredients_debug")
     private List<String> ingredientsDebug;
-    @SerializedName("last_editor")
+    @JsonProperty("last_editor")
     private String lastEditor;
-    @SerializedName("nutrition_data_per")
+    @JsonProperty("nutrition_data_per")
     private String nutritionDataPer;
-    @SerializedName("correctors_tags")
+    @JsonProperty("correctors_tags")
     private List<String> correctorsTags;
-    @SerializedName("serving_quantity")
+    @JsonProperty("serving_quantity")
     private int servingQuantity;
-    @SerializedName("stores_debug_tags")
+    @JsonProperty("stores_debug_tags")
     private List<String> storesDebugTags;
-    @SerializedName("debug_param_sorted_langs")
+    @JsonProperty("debug_param_sorted_langs")
     private List<String> debugParamSortedLangs;
     private int rev;
     private Languages languages;
-    @SerializedName("product_name_fr")
+    @JsonProperty("product_name_fr")
     private String productNameFr;
-    @SerializedName("additives_prev")
+    @JsonProperty("additives_prev")
     private String additivesPrev;
-    @SerializedName("manufacturing_places_debug_tags")
+    @JsonProperty("manufacturing_places_debug_tags")
     private List<String> manufacturingPlacesDebugTags;
-    @SerializedName("countries_debug_tags")
+    @JsonProperty("countries_debug_tags")
     private List<String> countriesDebugTags;
-    @SerializedName("purchase_places_debug_tags")
+    @JsonProperty("purchase_places_debug_tags")
     private List<String> purchasePlacesDebugTags;
-    @SerializedName("last_edit_dates_tags")
+    @JsonProperty("last_edit_dates_tags")
     private List<String> lastEditDatesTags;
-    @SerializedName("unique_scans_n")
+    @JsonProperty("unique_scans_n")
     private int uniqueScansN;
-    @SerializedName("interface_version_modified")
+    @JsonProperty("interface_version_modified")
     private String interfaceVersionModified;
-    @SerializedName("debug_tags")
+    @JsonProperty("debug_tags")
     private List<String> debugTags;
-    @SerializedName("ingredients_original_tags")
+    @JsonProperty("ingredients_original_tags")
     private List<String> ingredientsOriginalTags;
-    @SerializedName("vitamins_tags")
+    @JsonProperty("vitamins_tags")
     private List<String> vitaminsTags;
-    @SerializedName("image_front_thumb_url")
+    @JsonProperty("image_front_thumb_url")
     private String imageFrontThumbUrl;
-    @SerializedName("update_key")
+    @JsonProperty("update_key")
     private String updateKey;
-    @SerializedName("interface_version_created")
+    @JsonProperty("interface_version_created")
     private String interfaceVersionCreated;
-    @SerializedName("ingredients_from_palm_oil_n")
+    @JsonProperty("ingredients_from_palm_oil_n")
     private int ingredientsFromPalmOilN;
     private String link;
-    @SerializedName("categories_hierarchy")
+    @JsonProperty("categories_hierarchy")
     private List<String> categoriesHierarchy;
-    @SerializedName("unknown_ingredients_n")
+    @JsonProperty("unknown_ingredients_n")
     private int unknownIngredientsN;
-    @SerializedName("nutrition_grades_tags")
+    @JsonProperty("nutrition_grades_tags")
     private List<String> nutritionGradesTags;
-    @SerializedName("emb_codes_20141016")
+    @JsonProperty("emb_codes_20141016")
     private String embCodes20141016;
-    @SerializedName("nova_groups")
+    @JsonProperty("nova_groups")
     private String novaGroups;
     private String quantity;
-    @SerializedName("ingredients_text")
+    @JsonProperty("ingredients_text")
     private String ingredientsText;
-    @SerializedName("ingredients_from_or_that_may_be_from_palm_oil_n")
+    @JsonProperty("ingredients_from_or_that_may_be_from_palm_oil_n")
     private int ingredientsFromOrThatMayBeFromPalmOilN;
-    @SerializedName("codes_tags")
+    @JsonProperty("codes_tags")
     private List<String> codesTags;
     private Nutriments nutriments;
-    @SerializedName("nutrition_data_prepared_per")
+    @JsonProperty("nutrition_data_prepared_per")
     private String nutritionDataPreparedPer;
     private String lc;
-    @SerializedName("countries_tags")
+    @JsonProperty("countries_tags")
     private List<String> countriesTags;
-    @SerializedName("emb_codes_orig")
+    @JsonProperty("emb_codes_orig")
     private String embCodesOrig;
-    @SerializedName("additives_tags")
+    @JsonProperty("additives_tags")
     private List<String> additivesTags;
-    @SerializedName("ingredients_text_with_allergens")
+    @JsonProperty("ingredients_text_with_allergens")
     private String ingredientsTextWithAllergens;
-    @SerializedName("image_thumb_url")
+    @JsonProperty("image_thumb_url")
     private String imageThumbUrl;
-    @SerializedName("ingredients_n")
+    @JsonProperty("ingredients_n")
     private String ingredientsN;
-    @SerializedName("additives_original_tags")
+    @JsonProperty("additives_original_tags")
     private List<String> additivesOriginalTags;
-    @SerializedName("_id")
+    @JsonProperty("_id")
     private String Id;
-    @SerializedName("pnns_groups_2_tags")
+    @JsonProperty("pnns_groups_2_tags")
     private List<String> pnnsGroups2Tags;
-    @SerializedName("fruitNvegetableNnuts_100g_estimate")
+    @JsonProperty("fruitNvegetableNnuts_100g_estimate")
     private int fruitNvegetableNnuts100gEstimate;
-    @SerializedName("minerals_tags")
+    @JsonProperty("minerals_tags")
     private List<String> mineralsTags;
     private Images images;
-    @SerializedName("completed_t")
+    @JsonProperty("completed_t")
     private int completedT;
-    @SerializedName("origins_debug_tags")
+    @JsonProperty("origins_debug_tags")
     private List<String> originsDebugTags;
-    @SerializedName("ingredients_text_debug")
+    @JsonProperty("ingredients_text_debug")
     private String ingredientsTextDebug;
     private String states;
-    @SerializedName("labels_tags")
+    @JsonProperty("labels_tags")
     private List<String> labelsTags;
-    @SerializedName("labels_hierarchy")
+    @JsonProperty("labels_hierarchy")
     private List<String> labelsHierarchy;
-    @SerializedName("amino_acids_tags")
+    @JsonProperty("amino_acids_tags")
     private List<String> aminoAcidsTags;
-    @SerializedName("emb_codes")
+    @JsonProperty("emb_codes")
     private String embCodes;
-    @SerializedName("image_nutrition_thumb_url")
+    @JsonProperty("image_nutrition_thumb_url")
     private String imageNutritionThumbUrl;
     private int sortkey;
-    @SerializedName("image_front_small_url")
+    @JsonProperty("image_front_small_url")
     private String imageFrontSmallUrl;
-    @SerializedName("packaging_debug_tags")
+    @JsonProperty("packaging_debug_tags")
     private List<String> packagingDebugTags;
-    @SerializedName("image_ingredients_url")
+    @JsonProperty("image_ingredients_url")
     private String imageIngredientsUrl;
-    @SerializedName("additives_n")
+    @JsonProperty("additives_n")
     private int additivesN;
-    @SerializedName("traces_debug_tags")
+    @JsonProperty("traces_debug_tags")
     private List<String> tracesDebugTags;
-    @SerializedName("checkers_tags")
+    @JsonProperty("checkers_tags")
     private List<String> checkersTags;
-    @SerializedName("last_image_t")
+    @JsonProperty("last_image_t")
     private int lastImageT;
-    @SerializedName("categories_debug_tags")
+    @JsonProperty("categories_debug_tags")
     private List<String> categoriesDebugTags;
-    @SerializedName("allergens_from_ingredients")
+    @JsonProperty("allergens_from_ingredients")
     private String allergensFromIngredients;
-    @SerializedName("categories_tags")
+    @JsonProperty("categories_tags")
     private List<String> categoriesTags;
-    @SerializedName("product_quantity")
+    @JsonProperty("product_quantity")
     private int productQuantity;
     private String categories;
-    @SerializedName("allergens_hierarchy")
+    @JsonProperty("allergens_hierarchy")
     private List<String> allergensHierarchy;
-    @SerializedName("last_modified_by")
+    @JsonProperty("last_modified_by")
     private String lastModifiedBy;
-    @SerializedName("ingredients_from_palm_oil_tags")
+    @JsonProperty("ingredients_from_palm_oil_tags")
     private List<String> ingredientsFromPalmOilTags;
-    @SerializedName("unknown_nutrients_tags")
+    @JsonProperty("unknown_nutrients_tags")
     private List<String> unknownNutrientsTags;
     public void setIngredientsNTags(List<String> ingredientsNTags) {
          this.ingredientsNTags = ingredientsNTags;
