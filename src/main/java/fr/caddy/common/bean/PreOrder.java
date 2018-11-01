@@ -6,6 +6,14 @@ public class PreOrder extends Order {
 
     private Boolean ordered = false;
 
+    public Boolean getOrdered() {
+        return ordered;
+    }
+
+    public void setOrdered(Boolean ordered) {
+        this.ordered = ordered;
+    }
+
     @Override
     public String toString() {
         return String.format(

@@ -14,6 +14,7 @@ public interface PreOrderDao extends MongoRepository<PreOrder, Long> {
 
     public PreOrder findByIdExtAndSign(Long idExt, String sign);
 
-    public PreOrder findFirstBySignAndCustomerOrderByIdExtDesc(String sign, String customer);
+    public PreOrder findFirstByCustomerOrderByIdDesc(String customer);
 
+    public List<PreOrder> findByOrdered(Boolean ordered);
 }

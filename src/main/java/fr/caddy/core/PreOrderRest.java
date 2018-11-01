@@ -1,12 +1,8 @@
 package fr.caddy.core;
 
-import com.google.gson.Gson;
 import fr.caddy.common.bean.*;
 import fr.caddy.core.dao.UserDao;
-import fr.caddy.core.service.OrderService;
 import fr.caddy.core.service.PreOrderService;
-import fr.caddy.core.service.ProductInstanceService;
-import fr.caddy.core.service.ProductService;
 import fr.caddy.coursesu.basket.service.BasketUService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -28,7 +24,6 @@ public class PreOrderRest {
     @Autowired
     private UserDao userDao;
 
-
     @Autowired
     private BasketUService basketUService;
 
@@ -37,9 +32,20 @@ public class PreOrderRest {
         return preOrderService.getAll(customer);
     }
 
+    @RequestMapping(value="{customer}/last", method = RequestMethod.GET)
+    public PreOrder getLast(@PathVariable("customer") String customer) {
+        return preOrderService.getLastByCustomer(customer);
+    }
+
+
     @RequestMapping(value="{customer}/{id}", method = RequestMethod.GET)
     public PreOrder getById(@PathVariable("id") Long id) {
         return preOrderService.getById(id);
+    }
+
+    @RequestMapping(value="{id}", method = RequestMethod.PUT)
+    public PreOrder update(@PathVariable("id") Long id, @RequestBody PreOrder preOrder) {
+        return preOrderService.save(preOrder);
     }
 
     @RequestMapping(value="{customer}/prepare", method = RequestMethod.GET)
@@ -47,30 +53,28 @@ public class PreOrderRest {
         return preOrderService.prepareOrder(customer);
     }
 
-  /*  @GetMapping("/calculate")
-    public void calculate() {
+    @GetMapping("{id}/order")
+    public PreOrder order(@PathVariable("id") Long id) {
         final User user = userDao.findByLogin("bcorre");
-        final String customer = user.getLoginCoursesU();
-        final List<Product> products = productService.getAll(customer);
-        productService.calculateConsumptions(products);
-        productService.calculateAverage(products);
-        productService.calculateProbabilities(products);
-        Order order = productService.prepareOrder(customer);
-        LOG.info(""+order.getProducts().size());
-        LOG.info(new Gson().toJson(order));
-
-        final List<BasketPurchase> basket = new ArrayList<>();
-        for (Product product: order.getProducts()) {
-            BasketPurchase basketPurchase = new BasketPurchase();
-            ProductShop productShop = product.getProductInstances().get(0).getProductShops().get(0);
-            basketPurchase.setIdProduct(productShop.getId());
-            basketPurchase.setLabel(productShop.getLabel());
-            basketPurchase.setQuantity(product.getQuantity());
-            basketPurchase.setSign(productShop.getSign());
-            basket.add(basketPurchase);
+        final PreOrder preOrder = this.getById(id);
+        if (preOrder != null) {
+            final List<BasketPurchase> basket = new ArrayList<>();
+            for (Product product : preOrder.getProducts()) {
+                BasketPurchase basketPurchase = new BasketPurchase();
+                ProductShop productShop = product.getProductInstances().get(0).getProductShops().get(0);
+                basketPurchase.setIdProduct(productShop.getId());
+                basketPurchase.setLabel(productShop.getLabel());
+                basketPurchase.setQuantity(product.getQuantity());
+                basketPurchase.setSign(productShop.getSign());
+                basket.add(basketPurchase);
+            }
+            // prepare basket on coursesu
+            basketUService.basket(basket, user.getLoginCoursesU(), user.getPasswordCoursesU());
+            // update order
+            preOrder.setOrdered(true);
+            this.update(preOrder.getId(), preOrder);
         }
-
-        //basketUService.basket(basket, customer, user.getPasswordCoursesU());
-    }*/
+        return preOrder;
+    }
 
 }

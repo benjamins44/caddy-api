@@ -14,6 +14,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
@@ -43,6 +44,31 @@ public class PreOrderServiceImpl implements PreOrderService {
     }
 
     @Override
+    public PreOrder getLastByCustomer(String customer) {
+        return preOrderDao.findFirstByCustomerOrderByIdDesc(customer);
+    }
+
+    @Override
+    public PreOrder update(PreOrder preOrder) {
+        return preOrderDao.save(preOrder);
+    }
+
+    @Override
+    public void delete(PreOrder preOrder) {
+        preOrderDao.delete(preOrder);
+    }
+
+    @Override
+    public List<PreOrder> save(List<PreOrder> preOrders) {
+        return preOrderDao.saveAll(preOrders);
+    }
+
+    @Override
+    public PreOrder save(PreOrder preOrder) {
+        return preOrderDao.save(preOrder);
+    }
+
+    @Override
     public PreOrder create(PreOrder preOrder) {
         // generate id
         preOrder.setId(counterDao.getNextSequence(PreOrder.COLLECTION_NAME));
@@ -50,9 +76,16 @@ public class PreOrderServiceImpl implements PreOrderService {
     }
     @Override
     public PreOrder prepareOrder(String customer) {
+        // remove all preOrders not ordered
+        final List<PreOrder> preOrders = preOrderDao.findByOrdered(false);
+        for (PreOrder preOrder : preOrders) {
+            preOrderDao.delete(preOrder);
+        }
         // get all of the customers
         final List<Product> products = productService.getAll(customer);
         final PreOrder preOrder = new PreOrder();
+        preOrder.setDate(LocalDate.now());
+        preOrder.setCustomer(customer);
         for (Product product: products) {
             final Float propability = product.getConsumption().getProbalilityBuy();
             // test with seuil 90%
