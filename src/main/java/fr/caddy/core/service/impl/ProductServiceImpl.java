@@ -1,13 +1,16 @@
 package fr.caddy.core.service.impl;
 
 import fr.caddy.common.bean.*;
+import fr.caddy.common.helpers.UtilsHelper;
 import fr.caddy.core.dao.CounterDao;
 import fr.caddy.core.dao.ProductDao;
 import fr.caddy.core.service.ProductService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
+import java.text.NumberFormat;
 import java.time.LocalDate;
 import java.time.temporal.WeekFields;
 import java.util.*;
@@ -21,6 +24,8 @@ public class ProductServiceImpl implements ProductService {
 
     @Autowired
     private CounterDao counterDao;
+
+    public static final Float PERCENT_TO_ORDER = 0.9F;
 
     /**
      * Return the product of the product instance
@@ -58,6 +63,10 @@ public class ProductServiceImpl implements ProductService {
             this.removeProductInstances(product, productInstance);
             product.getProductInstances().add(productInstance);
             product.setCustomer(customer);
+            // set default image
+            if (StringUtils.isEmpty(product.getImage())) {
+                product.setImage(productInstance.getImage());
+            }
             // save it
             productDao.save(product);
         }
@@ -142,23 +151,23 @@ public class ProductServiceImpl implements ProductService {
     public List<Product> calculateConsumptionsOfOrders(List<Order> orders) {
         final Map<Long, Product> productCalculate = new HashMap<>();
         for (Order order: orders) {
-            for (ProductInstance productInstance : order.getProductInstances()) {
-                List<Product> products = productDao.findByOrderIdAndProductInstance(order.getId(), productInstance.getId());
+            for (Product product : order.getProducts()) {
+                List<Product> products = productDao.findByOrderIdAndProduct(order.getId(), product.getId());
                 if (products.isEmpty()) {
-                    // order is not in productInstance
-                    Product product = productCalculate.get(productInstance.getId());
-                    if (product == null) {
-                        product = this.getOrSave(productInstance, order.getCustomer());
-                    }
                     // add dayQuantity
                     final DayQuantity dayQuantity = new DayQuantity();
                     dayQuantity.setDay(order.getDate());
                     dayQuantity.setOrderId(order.getId());
-                    dayQuantity.setQuantity(productInstance.getQuantity());
+                    dayQuantity.setQuantity(product.getQuantity());
                     dayQuantity.setSign(order.getSign());
 
+                    final Product aProduct = productCalculate.get(product.getId());
+                    if (aProduct != null) {
+                        product = aProduct;
+                    }
+
                     product.getConsumption().getDayQuantity().add(dayQuantity);
-                    productCalculate.put(productInstance.getId(), product);
+                    productCalculate.put(product.getId(), product);
                 }
             }
         }
@@ -179,7 +188,6 @@ public class ProductServiceImpl implements ProductService {
                     mapWeek = new HashMap<>();
                     mapWeeklyQuantity.put(year, mapWeek);
                 }
-
 
                 Float quantity = mapWeek.get(week);
                 if (quantity == null) {
@@ -268,6 +276,7 @@ public class ProductServiceImpl implements ProductService {
         }
     }
     public void calculateProbabilities(Product product) {
+        product.setOrderStatus(ProductOrderStatus.NO_ORDER);
         WeekFields weekFields = WeekFields.of(Locale.getDefault());
         final Integer currentWeek = LocalDate.now().get(weekFields.weekOfWeekBasedYear());
         final Integer currentYeay = LocalDate.now().getYear();
@@ -276,40 +285,44 @@ public class ProductServiceImpl implements ProductService {
                     return (wq1.getYear() * 1000 + wq1.getWeek()) - (wq2.getYear() * 1000 + wq2.getWeek());
                 })
                 .map(weeklyQuantity -> weeklyQuantity);
+        Float probability = 0F;
+        Float quantity = 0F;
         if (wq.isPresent()) {
             final Integer nbWeekLastBuy = (currentWeek + (currentYeay - wq.get().getYear()) * 52) - wq.get().getWeek();
             product.getConsumption().setNbWeekOfLastBuy(nbWeekLastBuy);
             // use only first average calculated on 5 occurencies
             final Average average = product.getConsumption().getAverages().get(0);
-            Float probability = product.getConsumption().getNbWeekOfLastBuy() / average.getNbWeek();
+            if (average.getNbWeek() > 0) {
+                probability = product.getConsumption().getNbWeekOfLastBuy() / average.getNbWeek();
+                quantity = average.getQuantity();
+            }
             // if 6 x average of week < nb last week buy, or nb occurency < 3 , the product wiil be not buy, force it
             if (nbWeekLastBuy > average.getNbWeek() * 3 || average.getNbOccurences() < 3 || !ProductStatus.USED.equals(product.getStatus())) {
-                probability = 0F;
+                quantity = 0F;
+                if (ProductStatus.ABANDONNED.equals(product.getStatus())) {
+                    product.setOrderStatus(ProductOrderStatus.ABANDONNED);
+                    probability = -3F;
+                } else if (average.getNbOccurences() < 3 ) {
+                    product.setOrderStatus(ProductOrderStatus.NOT_ENOUGH_ORDERED);
+                    probability = -1F;
+                } else {
+                    product.setOrderStatus(ProductOrderStatus.NO_LONGER_PROPOSED);
+                    probability = -2F;
+                }
             }
-            product.getConsumption().setProbalilityBuy(probability);
-            product.getConsumption().setProbalilityQuantityBuy(average.getQuantity());
-            productDao.save(product);
+            if (probability > PERCENT_TO_ORDER) {
+                product.setOrderStatus(ProductOrderStatus.TO_ORDER);
+            }
+            if (probability > 1) {
+                probability = 1F;
+            }
         }
+        product.getConsumption().setProbalilityBuy(UtilsHelper.castTwoDecimal(probability));
+        product.getConsumption().setProbalilityQuantityBuy(UtilsHelper.castTwoDecimal(quantity));
+        productDao.save(product);
     }
 
-    public Order prepareOrder(String customer) {
-        // get all of the customers
-        final List<Product> products = getAll(customer);
-        final Order order = new Order();
-        for (Product product: products) {
-            final Float propability = product.getConsumption().getProbalilityBuy();
-            // test with seuil 90%
-            if (propability > 0.9F) {
-                // add to the order the first product instance
-                final ProductInstance productInstance = product.getProductInstances().get(0);
-                // cast to int the quantity (pas de gestion des produits au poids)
-                final Integer quantity = product.getConsumption().getProbalilityQuantityBuy().intValue();
-                productInstance.setQuantity(quantity.floatValue());
-                order.getProductInstances().add(productInstance);
-            }
-        }
-        return order;
-    }
+
 
     private void removeProductInstances(Product product, ProductInstance productInstance) {
         for (ProductInstance productInstanceCurrent : product.getProductInstances()) {

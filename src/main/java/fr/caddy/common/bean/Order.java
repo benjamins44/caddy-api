@@ -11,14 +11,14 @@ public class Order {
     public static final String COLLECTION_NAME = "Order";
 
     @Id
-    private Long id;
-    private LocalDate date;
-    private Float price;
-    private String customer;
-    private String sign;
-    private Long idExt;
+    protected Long id;
+    protected LocalDate date;
+    protected Float price;
+    protected String customer;
+    protected String sign;
+    protected Long idExt;
 
-    private List<ProductInstance> productsInstances = new ArrayList<>();
+    protected List<Product> products = new ArrayList<>();
 
     public LocalDate getDate() {
         return date;
@@ -44,11 +44,11 @@ public class Order {
         this.customer = customer;
     }
 
-    public List<ProductInstance> getProductInstances() {
-        return this.productsInstances;
+    public List<Product> getProducts() {
+        return this.products;
     }
-    public void setProductInstances(List<ProductInstance> productsInstances) {
-        this.productsInstances = productsInstances;
+    public void setProducts(List<Product> products) {
+        this.products= products;
     }
 
     public String getSign() {
@@ -78,7 +78,7 @@ public class Order {
     @Override
     public String toString() {
         return String.format(
-                "%s[id=%s, idExt=%s, date=%s, sign='%s', price=%s, customer='%s', productsInstances=%s ]",
-                COLLECTION_NAME, id, idExt, date, sign, price, customer, productsInstances);
+                "%s[id=%s, idExt=%s, date=%s, sign='%s', price=%s, customer='%s', products=%s ]",
+                COLLECTION_NAME, id, idExt, date, sign, price, customer, products);
     }
 }

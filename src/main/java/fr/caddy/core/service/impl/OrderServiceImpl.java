@@ -1,14 +1,12 @@
 package fr.caddy.core.service.impl;
 
-import fr.caddy.common.bean.HistoryOrder;
-import fr.caddy.common.bean.HistoryOrderProduct;
-import fr.caddy.common.bean.Order;
-import fr.caddy.common.bean.ProductInstance;
+import fr.caddy.common.bean.*;
 import fr.caddy.common.constants.Constants;
 import fr.caddy.core.dao.CounterDao;
 import fr.caddy.core.dao.OrderDao;
 import fr.caddy.core.service.OrderService;
 import fr.caddy.core.service.ProductInstanceService;
+import fr.caddy.core.service.ProductService;
 import fr.caddy.coursesu.history.service.impl.HistoryUServiceImpl;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +28,9 @@ public class OrderServiceImpl implements OrderService {
     private ProductInstanceService productInstanceService;
 
     @Autowired
+    private ProductService productService;
+
+    @Autowired
     private CounterDao counterDao;
 
     @Autowired
@@ -47,7 +48,7 @@ public class OrderServiceImpl implements OrderService {
         if (order == null) {
             // create it
             order = new Order();
-            order.setProductInstances(new ArrayList<>());
+            order.setProducts(new ArrayList<>());
             // copy property
             BeanUtils.copyProperties(historyOrder, order);
             // generate Id
@@ -56,10 +57,11 @@ public class OrderServiceImpl implements OrderService {
             order.setIdExt(historyOrder.getId());
             // get and save product instances
             for (HistoryOrderProduct historyOrderProduct : historyOrder.getProductOrders()) {
-                ProductInstance productInstance = productInstanceService.getOrSave(historyOrderProduct, historyOrder.getSign());
+                final ProductInstance productInstance = productInstanceService.getOrSave(historyOrderProduct, historyOrder.getSign());
+                final Product product = productService.getOrSave(productInstance, order.getCustomer());
                 // set quantity
-                productInstance.setQuantity(historyOrderProduct.getQuantity());
-                order.getProductInstances().add(productInstance);
+                product.setQuantity(historyOrderProduct.getQuantity());
+                order.getProducts().add(product);
             }
             // save it
             orderDao.save(order);
@@ -87,16 +89,26 @@ public class OrderServiceImpl implements OrderService {
     public List<Order> getNewOrders(final String customer, final String password) {
         // courses U, get last order
         final Order order = this.orderDao.findFirstBySignAndCustomerOrderByIdExtDesc(Constants.SIGN_U, customer);
-        LOG.info(String.format("last order U : %s", order.getId()));
+        Long id = 0L;
         if (order != null) {
-            // extract last orders
-            final List<HistoryOrder> historyOrders = this.historyUService.getNewHistory(customer, password, order.getIdExt());
-            // save them
-            final List<Order> orders = this.getOrSave(historyOrders);
-            return orders;
+            id = order.getIdExt();
         }
-        return new ArrayList<>();
+        LOG.info(String.format("last order U : %s", id));
+        // extract last orders
+        final List<HistoryOrder> historyOrders = this.historyUService.getNewHistory(customer, password, id);
+        // save them
+        final List<Order> orders = this.getOrSave(historyOrders);
+        return orders;
+    }
 
+    @Override
+    public List<Order> getAll(String customer) {
+        return orderDao.findByCustomer(customer);
+    }
+
+    @Override
+    public Order getById(Long id) {
+        return orderDao.findById(id).get();
     }
 
 

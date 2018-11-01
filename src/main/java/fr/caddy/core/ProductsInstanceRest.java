@@ -32,6 +32,7 @@ public class ProductsInstanceRest {
     public ProductInstance getById(@PathVariable("id") Long id) {
         return productInstanceService.getById(id);
     }
+
     @RequestMapping(value="{id}/query", method = RequestMethod.GET)
     public ProductInstance getById(@PathVariable("id") Long id, @RequestParam("refresh") Boolean refresh, @RequestParam("ean") Long ean) {
         ProductInstance productInstance = productInstanceService.getById(id);
@@ -41,6 +42,7 @@ public class ProductsInstanceRest {
         }
         return productInstance;
     }
+
     @RequestMapping(value="{id}", method = RequestMethod.PUT)
     public ProductInstance update(@PathVariable("id") Long id, @RequestBody ProductInstance productInstance) {
         productInstance.setId(id);

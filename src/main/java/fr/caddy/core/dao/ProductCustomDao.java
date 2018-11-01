@@ -8,6 +8,6 @@ public interface ProductCustomDao {
 
     public List<Product> findByIdProductInstance(Long id);
 
-    public List<Product> findByOrderIdAndProductInstance(Long orderId, Long productInstanceId);
+    public List<Product> findByOrderIdAndProduct(Long orderId, Long productId);
 
 }

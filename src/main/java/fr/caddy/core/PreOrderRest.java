@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import fr.caddy.common.bean.*;
 import fr.caddy.core.dao.UserDao;
 import fr.caddy.core.service.OrderService;
+import fr.caddy.core.service.PreOrderService;
 import fr.caddy.core.service.ProductInstanceService;
 import fr.caddy.core.service.ProductService;
 import fr.caddy.coursesu.basket.service.BasketUService;
@@ -16,63 +17,37 @@ import java.util.logging.Logger;
 
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
-@RequestMapping("orders")
-public class OrderRest {
+@RequestMapping("preorders")
+public class PreOrderRest {
 
-    private static final Logger LOG = Logger.getLogger(OrderRest.class.getName());
+    private static final Logger LOG = Logger.getLogger(PreOrderRest.class.getName());
 
     @Autowired
-    private OrderService orderService;
+    private PreOrderService preOrderService;
 
     @Autowired
     private UserDao userDao;
 
-    @Autowired
-    private ProductService productService;
-
-    @Autowired
-    private ProductInstanceService productInstanceService;
 
     @Autowired
     private BasketUService basketUService;
 
     @RequestMapping(value="{customer}", method = RequestMethod.GET)
-    public List<Order> get(@PathVariable("customer") String customer) {
-        return orderService.getAll(customer);
+    public List<PreOrder > get(@PathVariable("customer") String customer) {
+        return preOrderService.getAll(customer);
     }
 
     @RequestMapping(value="{customer}/{id}", method = RequestMethod.GET)
-    public Order getById(@PathVariable("id") Long id) {
-        return orderService.getById(id);
+    public PreOrder getById(@PathVariable("id") Long id) {
+        return preOrderService.getById(id);
     }
 
-
-    @GetMapping("/refresh")
-    public void extract() {
-
-        final User user = userDao.findByLogin("bcorre");
-        final String customer = user.getLoginCoursesU();
-        final String password = user.getPasswordCoursesU();
-        final List<Order> orders = orderService.getNewOrders(customer, password);
-
-        final List<Product> products = productService.calculateConsumptionsOfOrders(orders);
-        productService.calculateAverage(products);
+    @RequestMapping(value="{customer}/prepare", method = RequestMethod.GET)
+    public PreOrder prepare(@PathVariable("customer") String customer) {
+        return preOrderService.prepareOrder(customer);
     }
 
-    @GetMapping("/open")
-    public void open() {
-
-        final User user = userDao.findByLogin("bcorre");
-        final String customer = user.getLoginCoursesU();
-
-        final List<Product> products = productService.getAll(customer);
-        for (Product product: products) {
-            productInstanceService.refresh(product.getProductInstances().get(0));
-        }
-    }
-
-
- /*   @GetMapping("/calculate")
+  /*  @GetMapping("/calculate")
     public void calculate() {
         final User user = userDao.findByLogin("bcorre");
         final String customer = user.getLoginCoursesU();

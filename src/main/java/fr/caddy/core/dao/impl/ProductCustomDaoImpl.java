@@ -19,8 +19,8 @@ public class ProductCustomDaoImpl implements ProductCustomDao {
         return mongoTemplate.find(query, Product.class);
     }
 
-    public List<Product> findByOrderIdAndProductInstance(Long orderId, Long productInstanceId) {
-        final Query query = new Query(Criteria.where("productInstances.id").is(productInstanceId)
+    public List<Product> findByOrderIdAndProduct(Long orderId, Long productId) {
+        final Query query = new Query(Criteria.where("id").is(productId)
             .and("consumption.dayQuantity.orderId").is(orderId));
         return mongoTemplate.find(query, Product.class);
     }

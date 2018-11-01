@@ -56,6 +56,7 @@ public class ProductInstanceServiceImpl implements ProductInstanceService {
             // copy property
             BeanUtils.copyProperties(historyOrderproduct, productInstance);
             productInstance.setQuantity(null);
+            productInstance.setImage(historyOrderproduct.getUrl());
             // generate Id
             productInstance.setId(counterDao.getNextSequence(ProductInstance.COLLECTION_NAME));
             // create product shop
@@ -142,6 +143,11 @@ public class ProductInstanceServiceImpl implements ProductInstanceService {
                 result++;
             }
             LOG.info(String.format("End Refresh, %s datas modified", result));
+        }
+        // set default image
+        if (StringUtils.isEmpty(productInstance.getImage()) && productInstance.getProductShops().size() > 0) {
+            productInstance.setImage(productInstance.getProductShops().get(0).getUrl());
+            result++;
         }
         if (result > 0) {
             // save it

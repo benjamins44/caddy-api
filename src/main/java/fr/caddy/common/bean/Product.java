@@ -24,7 +24,13 @@ public class Product {
 
     private String dlc;
 
+    private String image;
+
+    private Float quantity;
+
     private ProductStatus status = ProductStatus.USED;
+
+    private ProductOrderStatus orderStatus = ProductOrderStatus.NO_ORDER;
 
     public String getLabel() {
         return label;
@@ -106,10 +112,34 @@ public class Product {
         this.status = status;
     }
 
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public ProductOrderStatus getOrderStatus() {
+        return orderStatus;
+    }
+
+    public void setOrderStatus(ProductOrderStatus orderStatus) {
+        this.orderStatus = orderStatus;
+    }
+
+    public Float getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Float quantity) {
+        this.quantity = quantity;
+    }
+
     @Override
     public String toString() {
         return String.format(
-                "%s[id=%s, label='%s', customer='%s', type='%s', family='%s', category='%s', dlc='%s', status='%', consumption=%s, productInstances=%s ]",
-                COLLECTION_NAME, id, label, customer, type, family, category, dlc, status,  consumption, productInstances);
+                "%s[id=%s, label='%s', customer='%s', type='%s', family='%s', category='%s', quantity=%s, dlc='%s', status='%', orderStatus='%s', consumption=%s, productInstances=%s, image='%s' ]",
+                COLLECTION_NAME, id, label, customer, type, family, category, quantity, dlc, status, orderStatus, consumption, productInstances, image);
     }
 }

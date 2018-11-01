@@ -74,7 +74,4 @@ public interface ProductService {
 
     public void calculateProbabilities(List<Product> products);
     public void calculateProbabilities(Product product);
-
-    public Order prepareOrder(String customer);
-
 }
