@@ -70,32 +70,4 @@ public class OrderRest {
             productInstanceService.refresh(product.getProductInstances().get(0));
         }
     }
-
-
- /*   @GetMapping("/calculate")
-    public void calculate() {
-        final User user = userDao.findByLogin("bcorre");
-        final String customer = user.getLoginCoursesU();
-        final List<Product> products = productService.getAll(customer);
-        productService.calculateConsumptions(products);
-        productService.calculateAverage(products);
-        productService.calculateProbabilities(products);
-        Order order = productService.prepareOrder(customer);
-        LOG.info(""+order.getProducts().size());
-        LOG.info(new Gson().toJson(order));
-
-        final List<BasketPurchase> basket = new ArrayList<>();
-        for (Product product: order.getProducts()) {
-            BasketPurchase basketPurchase = new BasketPurchase();
-            ProductShop productShop = product.getProductInstances().get(0).getProductShops().get(0);
-            basketPurchase.setIdProduct(productShop.getId());
-            basketPurchase.setLabel(productShop.getLabel());
-            basketPurchase.setQuantity(product.getQuantity());
-            basketPurchase.setSign(productShop.getSign());
-            basket.add(basketPurchase);
-        }
-
-        //basketUService.basket(basket, customer, user.getPasswordCoursesU());
-    }*/
-
 }
