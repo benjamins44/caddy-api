@@ -2,6 +2,7 @@
 package fr.caddy.common.bean;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.web.SortDefault;
 
 import java.util.List;
 
@@ -11,8 +12,6 @@ public class Product {
 
     @Id
     private Long id;
-
-    private String label;
 
     private String customer;
 
@@ -24,20 +23,11 @@ public class Product {
 
     private String dlc;
 
-    private String image;
-
     private Float quantity;
 
     private ProductStatus status = ProductStatus.USED;
 
     private ProductOrderStatus orderStatus = ProductOrderStatus.NO_ORDER;
-
-    public String getLabel() {
-        return label;
-    }
-    public void setLabel(String label) {
-        this.label = label;
-    }
 
     public String getType() {
         return type;
@@ -70,7 +60,14 @@ public class Product {
 
     private Consumption consumption;
 
-    private List<ProductInstance> productInstances = null;
+    private List<ProductInstance> substitutes = null;
+
+    private ProductInstance favorite = null;
+
+    private List<ProductInstance> histories = null;
+
+    private List<ProductInstance> bestSubstitutes = null;
+
 
     public Long getId() {
         return id;
@@ -86,14 +83,6 @@ public class Product {
 
     public void setConsumption(Consumption consumption) {
         this.consumption = consumption;
-    }
-
-    public List<ProductInstance> getProductInstances() {
-        return productInstances;
-    }
-
-    public void setProductInstances(List<ProductInstance> productInstances) {
-        this.productInstances = productInstances;
     }
 
     public String getCustomer() {
@@ -112,14 +101,6 @@ public class Product {
         this.status = status;
     }
 
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
-
     public ProductOrderStatus getOrderStatus() {
         return orderStatus;
     }
@@ -136,10 +117,42 @@ public class Product {
         this.quantity = quantity;
     }
 
+    public List<ProductInstance> getSubstitutes() {
+        return substitutes;
+    }
+
+    public void setSubstitutes(List<ProductInstance> substitutes) {
+        this.substitutes = substitutes;
+    }
+
+    public ProductInstance getFavorite() {
+        return favorite;
+    }
+
+    public void setFavorite(ProductInstance favorite) {
+        this.favorite = favorite;
+    }
+
+    public List<ProductInstance> getHistories() {
+        return histories;
+    }
+
+    public void setHistories(List<ProductInstance> histories) {
+        this.histories = histories;
+    }
+
+    public List<ProductInstance> getBestSubstitutes() {
+        return bestSubstitutes;
+    }
+
+    public void setBestSubstitutes(List<ProductInstance> bestSubstitutes) {
+        this.bestSubstitutes = bestSubstitutes;
+    }
+
     @Override
     public String toString() {
         return String.format(
-                "%s[id=%s, label='%s', customer='%s', type='%s', family='%s', category='%s', quantity=%s, dlc='%s', status='%', orderStatus='%s', consumption=%s, productInstances=%s, image='%s' ]",
-                COLLECTION_NAME, id, label, customer, type, family, category, quantity, dlc, status, orderStatus, consumption, productInstances, image);
+                "%s[id=%s, customer='%s', type='%s', family='%s', category='%s', quantity=%s, dlc='%s', status='%', orderStatus='%s', consumption=%s, substitutes=%s, favorite=%s, histories=%s, bestSubstitutes=%s ]",
+                COLLECTION_NAME, id, customer, type, family, category, quantity, dlc, status, orderStatus, consumption, substitutes, favorite, histories, bestSubstitutes);
     }
 }

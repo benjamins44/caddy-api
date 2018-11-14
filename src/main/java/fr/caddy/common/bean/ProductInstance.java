@@ -5,6 +5,7 @@ import fr.caddy.common.constants.Constants;
 import org.springframework.data.annotation.Id;
 
 import java.util.List;
+import java.util.Map;
 
 public class ProductInstance {
 
@@ -13,9 +14,10 @@ public class ProductInstance {
     @Id
     private Long id;
 
-    private String brand;
+    private String brand; // brands
     private String label;
-    private List<String> category;
+    private String label2; // product_name
+    private String category; // categories
     private Integer priority;
     private Long openFoodFactId;
     private Integer nova;
@@ -27,12 +29,20 @@ public class ProductInstance {
     private Integer unitWeight;
     private Integer totalWeight;
     private Integer unitCount;
+    private String ingredientsList; // ingredients_text_with_allergens
+    private List<String> allergens; // allergens_tags:[ "en:gluten", "en:sesame-seeds" ]
+    private List<String> traces; // traces_hierarchy: [ "en:eggs","en:milk" ]
+    private List<String> nutrientsLevel; //nutrient_levels: { "saturated-fat" : "low", "sugars" : "moderate", "fat" : "moderate", "salt" : "moderate" }
+    private List<ProductAdditives> additives; // additives_tags: [ "en:e282" ]
+    private FoodScore foodScore;
+    private Integer complete;
 
-    public List<String> getCategory() {
+
+    public String getCategory() {
         return category;
     }
 
-    public void setCategory(List<String> category) {
+    public void setCategory(String category) {
         this.category = category;
     }
 
@@ -140,10 +150,76 @@ public class ProductInstance {
         this.unitCount = unitCount;
     }
 
+    public String getLabel2() {
+        return label2;
+    }
+
+    public void setLabel2(String label2) {
+        this.label2 = label2;
+    }
+
+    public String getIngredientsList() {
+        return ingredientsList;
+    }
+
+    public void setIngredientsList(String ingredientsList) {
+        this.ingredientsList = ingredientsList;
+    }
+
+    public List<String> getAllergens() {
+        return allergens;
+    }
+
+    public void setAllergens(List<String> allergens) {
+        this.allergens = allergens;
+    }
+
+    public List<String> getTraces() {
+        return traces;
+    }
+
+    public void setTraces(List<String> traces) {
+        this.traces = traces;
+    }
+
+    public List<String> getNutrientsLevel() {
+        return nutrientsLevel;
+    }
+
+    public void setNutrientsLevel(List<String> nutrientsLevel) {
+        this.nutrientsLevel = nutrientsLevel;
+    }
+
+    public List<ProductAdditives> getAdditives() {
+        return additives;
+    }
+
+    public void setAdditives(List<ProductAdditives> additives) {
+        this.additives = additives;
+    }
+
+    public Integer getComplete() {
+        return complete;
+    }
+
+    public void setComplete(Integer complete) {
+        this.complete = complete;
+    }
+
+    public FoodScore getFoodScore() {
+        return foodScore;
+    }
+
+    public void setFoodScore(FoodScore foodScore) {
+        this.foodScore = foodScore;
+    }
+
     @Override
     public String toString() {
         return String.format(
-                "%s[id=%s, quantity=%s, unit='%s', brand='%s', label='%s', priority=%s, openFoodFactId=%s, nova=%s, nutriscore='%s', image='%s', productShops=%s, category=%s, unitWeight=%s, totalWeight=%s, unitCount=%s ]",
-                COLLECTION_NAME, id, quantity, unit, brand, label, priority, openFoodFactId, nova, nutriscore, image, productShops, category, unitWeight, totalWeight, unitCount);
+                "%s[id=%s, quantity=%s, unit='%s', brand='%s', label='%s', label2='%s', priority=%s, openFoodFactId=%s, nova=%s, nutriscore='%s', image='%s', productShops=%s, category=%s, unitWeight=%s, totalWeight=%s, unitCount=%s, " +
+                        "ingredientsList='%s', allergens=%s, traces=%s, nutrientsLevel=%s, additives=%s, foodScore=%s, complete=%s ]",
+                COLLECTION_NAME, id, quantity, unit, brand, label, label2, priority, openFoodFactId, nova, nutriscore, image, productShops, category, unitWeight, totalWeight, unitCount,
+                ingredientsList, allergens, traces, nutrientsLevel, additives, foodScore, complete);
     }
 }

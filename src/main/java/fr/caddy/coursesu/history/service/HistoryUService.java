@@ -15,4 +15,6 @@ public interface HistoryUService {
 
     public List<HistoryOrder> findAllByDate(String customer, String date) throws Exception;
 
+    public void offCoursesUId(final String login, final String password);
+
 }

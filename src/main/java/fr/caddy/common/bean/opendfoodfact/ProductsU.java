@@ -2,352 +2,514 @@
 package fr.caddy.common.bean.opendfoodfact;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Field;
+
 
 import java.util.List;
 /* Time: 2018-10-07 17:37:11 @author freecodeformat.com @website http://www.freecodeformat.com/json2javabean.php */
-public class Product {
+public class ProductsU {
 
+    @Id
+    private Long id;
     @JsonProperty("ingredients_n_tags")
+
     private List<String> ingredientsNTags;
+    @Field("product_name")
     @JsonProperty("product_name")
     private String productName;
+    @Field("image_nutrition_url")
     @JsonProperty("image_nutrition_url")
     private String imageNutritionUrl;
+    @Field("image_front_url")
     @JsonProperty("image_front_url")
     private String imageFrontUrl;
+    @Field("manufacturing_places_tags")
     @JsonProperty("manufacturing_places_tags")
     private List<String> manufacturingPlacesTags;
+    @Field("emb_codes_debug_tags")
     @JsonProperty("emb_codes_debug_tags")
     private List<String> embCodesDebugTags;
+    @Field("additives_old_n")
     @JsonProperty("additives_old_n")
     private int additivesOldN;
+    @Field("nucleotides_prev_tags")
     @JsonProperty("nucleotides_prev_tags")
     private List<String> nucleotidesPrevTags;
+    @Field("purchase_places")
     @JsonProperty("purchase_places")
     private String purchasePlaces;
+    @Field("nutrition_score_debug")
     @JsonProperty("nutrition_score_debug")
     private String nutritionScoreDebug;
+    @Field("languages_hierarchy")
     @JsonProperty("languages_hierarchy")
     private List<String> languagesHierarchy;
+    @Field("created_t")
     @JsonProperty("created_t")
     private int createdT;
+    @Field("max_imgid")
     @JsonProperty("max_imgid")
     private String maxImgid;
+    @Field("packaging_tags")
     @JsonProperty("packaging_tags")
     private List<String> packagingTags;
+    @Field("informers_tags")
     @JsonProperty("informers_tags")
     private List<String> informersTags;
+    @Field("categories_prev_hierarchy")
     @JsonProperty("categories_prev_hierarchy")
     private List<String> categoriesPrevHierarchy;
+    @Field("ingredients_hierarchy")
     @JsonProperty("ingredients_hierarchy")
     private List<String> ingredientsHierarchy;
+    @Field("cities_tags")
     @JsonProperty("cities_tags")
     private List<String> citiesTags;
+    @Field("image_nutrition_small_url")
     @JsonProperty("image_nutrition_small_url")
     private String imageNutritionSmallUrl;
+    @Field("nutrient_levels_tags")
     @JsonProperty("nutrient_levels_tags")
     private List<String> nutrientLevelsTags;
     private String code;
+    @Field("entry_dates_tags")
     @JsonProperty("entry_dates_tags")
     private List<String> entryDatesTags;
+    @Field("traces_hierarchy")
     @JsonProperty("traces_hierarchy")
     private List<String> tracesHierarchy;
+    @Field("additives_prev_tags")
     @JsonProperty("additives_prev_tags")
     private List<String> additivesPrevTags;
+    @Field("nutrition_data_per_debug_tags")
     @JsonProperty("nutrition_data_per_debug_tags")
     private List<String> nutritionDataPerDebugTags;
     private String countries;
+    @Field("nova_group_debug")
     @JsonProperty("nova_group_debug")
     private String novaGroupDebug;
     private String lang;
+    @Field("serving_size_debug_tags")
     @JsonProperty("serving_size_debug_tags")
     private List<String> servingSizeDebugTags;
+    @Field("brands_tags")
     @JsonProperty("brands_tags")
     private List<String> brandsTags;
+    @Field("photographers_tags")
     @JsonProperty("photographers_tags")
     private List<String> photographersTags;
+    @Field("generic_name_fr")
     @JsonProperty("generic_name_fr")
     private String genericNameFr;
+    @Field("stores_tags")
     @JsonProperty("stores_tags")
     private List<String> storesTags;
+    @Field("link_debug_tags")
     @JsonProperty("link_debug_tags")
     private List<String> linkDebugTags;
+    @Field("minerals_prev_tags")
     @JsonProperty("minerals_prev_tags")
     private List<String> mineralsPrevTags;
+    @Field("nova_groups_tags")
     @JsonProperty("nova_groups_tags")
     private List<String> novaGroupsTags;
+    @Field("nova_group")
     @JsonProperty("nova_group")
     private String novaGroup;
+    @Field("nucleotides_tags")
     @JsonProperty("nucleotides_tags")
     private List<String> nucleotidesTags;
+    @Field("no_nutrition_data")
     @JsonProperty("no_nutrition_data")
     private String noNutritionData;
+    @Field("expiration_date_debug_tags")
     @JsonProperty("expiration_date_debug_tags")
     private List<String> expirationDateDebugTags;
+    @Field("languages_codes")
     @JsonProperty("languages_codes")
     private LanguagesCodes languagesCodes;
+    @Field("ingredients_ids_debug")
     @JsonProperty("ingredients_ids_debug")
     private List<String> ingredientsIdsDebug;
+    @Field("image_url")
     @JsonProperty("image_url")
     private String imageUrl;
+    @Field("ingredients_text_with_allergens_fr")
     @JsonProperty("ingredients_text_with_allergens_fr")
     private String ingredientsTextWithAllergensFr;
     private List<Sources> sources;
+    @Field("quantity_debug_tags")
     @JsonProperty("quantity_debug_tags")
     private List<String> quantityDebugTags;
+    @Field("serving_size")
     @JsonProperty("serving_size")
     private String servingSize;
+    @Field("nutrition_score_warning_no_fruits_vegetables_nuts")
     @JsonProperty("nutrition_score_warning_no_fruits_vegetables_nuts")
     private int nutritionScoreWarningNoFruitsVegetablesNuts;
+    @Field("ingredients_text_fr_debug_tags")
     @JsonProperty("ingredients_text_fr_debug_tags")
     private List<String> ingredientsTextFrDebugTags;
+    @Field("nutrition_grade_fr")
     @JsonProperty("nutrition_grade_fr")
     private String nutritionGradeFr;
+    @Field("generic_name")
     @JsonProperty("generic_name")
     private String genericName;
+    @Field("editors_tags")
     @JsonProperty("editors_tags")
     private List<String> editorsTags;
+    @Field("additives_old_tags")
     @JsonProperty("additives_old_tags")
     private List<String> additivesOldTags;
+    @Field("additives_debug_tags")
     @JsonProperty("additives_debug_tags")
     private List<String> additivesDebugTags;
+    @Field("product_name_fr_debug_tags")
     @JsonProperty("product_name_fr_debug_tags")
     private List<String> productNameFrDebugTags;
+    @Field("categories_prev_tags")
     @JsonProperty("categories_prev_tags")
     private List<String> categoriesPrevTags;
     private String allergens;
+    @Field("countries_hierarchy")
     @JsonProperty("countries_hierarchy")
     private List<String> countriesHierarchy;
+    @Field("quality_tags")
     @JsonProperty("quality_tags")
     private List<String> qualityTags;
+    @Field("ingredients_that_may_be_from_palm_oil_n")
     @JsonProperty("ingredients_that_may_be_from_palm_oil_n")
     private int ingredientsThatMayBeFromPalmOilN;
+    @Field("emb_codes_tags")
     @JsonProperty("emb_codes_tags")
     private List<String> embCodesTags;
+    @Field("last_image_dates_tags")
     @JsonProperty("last_image_dates_tags")
     private List<String> lastImageDatesTags;
+    @Field("additives_prev_original_tags")
     @JsonProperty("additives_prev_original_tags")
     private List<String> additivesPrevOriginalTags;
+    @Field("brands_debug_tags")
     @JsonProperty("brands_debug_tags")
     private List<String> brandsDebugTags;
+    @Field("states_hierarchy")
     @JsonProperty("states_hierarchy")
     private List<String> statesHierarchy;
+    @Field("nutrition_grades")
     @JsonProperty("nutrition_grades")
     private String nutritionGrades;
+    @Field("nutrient_levels")
     @JsonProperty("nutrient_levels")
     private NutrientLevels nutrientLevels;
+    @Field("traces_tags")
     @JsonProperty("traces_tags")
     private List<String> tracesTags;
     private String additives;
+    @Field("new_additives_n")
     @JsonProperty("new_additives_n")
     private int newAdditivesN;
+    @Field("labels_prev_tags")
     @JsonProperty("labels_prev_tags")
     private List<String> labelsPrevTags;
     private String origins;
+    @Field("ingredients_text_fr")
     @JsonProperty("ingredients_text_fr")
     private String ingredientsTextFr;
     private String brands;
+    @Field("pnns_groups_2")
     @JsonProperty("pnns_groups_2")
     private String pnnsGroups2;
+    @Field("image_small_url")
     @JsonProperty("image_small_url")
     private String imageSmallUrl;
+    @Field("vitamins_prev_tags")
     @JsonProperty("vitamins_prev_tags")
     private List<String> vitaminsPrevTags;
+    @Field("last_modified_t")
     @JsonProperty("last_modified_t")
     private int lastModifiedT;
+    @Field("misc_tags")
     @JsonProperty("misc_tags")
     private List<String> miscTags;
+    @Field("labels_debug_tags")
     @JsonProperty("labels_debug_tags")
     private List<String> labelsDebugTags;
+    @Field("image_ingredients_thumb_url")
     @JsonProperty("image_ingredients_thumb_url")
     private String imageIngredientsThumbUrl;
     private List<String> editors;
     private String labels;
     private String packaging;
+    @Field("lang_debug_tags")
     @JsonProperty("lang_debug_tags")
     private List<String> langDebugTags;
+    @Field("selected_images")
     @JsonProperty("selected_images")
     private SelectedImages selectedImages;
     private String creator;
     private List<Ingredients> ingredients;
+    @Field("additives_prev_n")
     @JsonProperty("additives_prev_n")
     private int additivesPrevN;
+    @Field("purchase_places_tags")
     @JsonProperty("purchase_places_tags")
     private List<String> purchasePlacesTags;
+    @Field("pnns_groups_1")
     @JsonProperty("pnns_groups_1")
     private String pnnsGroups1;
+    @Field("scans_n")
     @JsonProperty("scans_n")
     private int scansN;
+    @Field("ingredients_tags")
     @JsonProperty("ingredients_tags")
     private List<String> ingredientsTags;
+    @Field("allergens_tags")
     @JsonProperty("allergens_tags")
     private List<String> allergensTags;
-    private String id;
+
+    @Field("traces_from_ingredients")
     @JsonProperty("traces_from_ingredients")
     private String tracesFromIngredients;
+    @Field("pnns_groups_1_tags")
     @JsonProperty("pnns_groups_1_tags")
     private List<String> pnnsGroups1Tags;
+    @Field("states_tags")
     @JsonProperty("states_tags")
     private List<String> statesTags;
+    @Field("image_ingredients_small_url")
     @JsonProperty("image_ingredients_small_url")
     private String imageIngredientsSmallUrl;
+    @Field("labels_prev_hierarchy")
     @JsonProperty("labels_prev_hierarchy")
     private List<String> labelsPrevHierarchy;
     private String traces;
+    @Field("origins_tags")
     @JsonProperty("origins_tags")
     private List<String> originsTags;
     private String stores;
+    @Field("ingredients_that_may_be_from_palm_oil_tags")
     @JsonProperty("ingredients_that_may_be_from_palm_oil_tags")
     private List<String> ingredientsThatMayBeFromPalmOilTags;
+    @Field("expiration_date")
     @JsonProperty("expiration_date")
     private String expirationDate;
+    @Field("generic_name_fr_debug_tags")
     @JsonProperty("generic_name_fr_debug_tags")
     private List<String> genericNameFrDebugTags;
+    @Field("amino_acids_prev_tags")
     @JsonProperty("amino_acids_prev_tags")
     private List<String> aminoAcidsPrevTags;
+    @Field("_keywords")
     @JsonProperty("_keywords")
     private List<String> Keywords;
     private int complete;
+    @Field("manufacturing_places")
     @JsonProperty("manufacturing_places")
     private String manufacturingPlaces;
+    @Field("ingredients_debug")
     @JsonProperty("ingredients_debug")
     private List<String> ingredientsDebug;
+    @Field("last_editor")
     @JsonProperty("last_editor")
     private String lastEditor;
+    @Field("nutrition_data_per")
     @JsonProperty("nutrition_data_per")
     private String nutritionDataPer;
+    @Field("correctors_tags")
     @JsonProperty("correctors_tags")
     private List<String> correctorsTags;
+    @Field("serving_quantity")
     @JsonProperty("serving_quantity")
     private int servingQuantity;
+    @Field("stores_debug_tags")
     @JsonProperty("stores_debug_tags")
     private List<String> storesDebugTags;
+    @Field("debug_param_sorted_langs")
     @JsonProperty("debug_param_sorted_langs")
     private List<String> debugParamSortedLangs;
     private int rev;
     private Languages languages;
+    @Field("product_name_fr")
     @JsonProperty("product_name_fr")
     private String productNameFr;
+    @Field("additives_prev")
     @JsonProperty("additives_prev")
     private String additivesPrev;
+    @Field("manufacturing_places_debug_tags")
     @JsonProperty("manufacturing_places_debug_tags")
     private List<String> manufacturingPlacesDebugTags;
+    @Field("countries_debug_tags")
     @JsonProperty("countries_debug_tags")
     private List<String> countriesDebugTags;
+    @Field("purchase_places_debug_tags")
     @JsonProperty("purchase_places_debug_tags")
     private List<String> purchasePlacesDebugTags;
+    @Field("last_edit_dates_tags")
     @JsonProperty("last_edit_dates_tags")
     private List<String> lastEditDatesTags;
+    @Field("unique_scans_n")
     @JsonProperty("unique_scans_n")
     private int uniqueScansN;
+    @Field("interface_version_modified")
     @JsonProperty("interface_version_modified")
     private String interfaceVersionModified;
+    @Field("debug_tags")
     @JsonProperty("debug_tags")
     private List<String> debugTags;
+    @Field("ingredients_original_tags")
     @JsonProperty("ingredients_original_tags")
     private List<String> ingredientsOriginalTags;
+    @Field("vitamins_tags")
     @JsonProperty("vitamins_tags")
     private List<String> vitaminsTags;
+    @Field("image_front_thumb_url")
     @JsonProperty("image_front_thumb_url")
     private String imageFrontThumbUrl;
+    @Field("update_key")
     @JsonProperty("update_key")
     private String updateKey;
+    @Field("interface_version_created")
     @JsonProperty("interface_version_created")
     private String interfaceVersionCreated;
+    @Field("ingredients_from_palm_oil_n")
     @JsonProperty("ingredients_from_palm_oil_n")
     private int ingredientsFromPalmOilN;
     private String link;
+    @Field("categories_hierarchy")
     @JsonProperty("categories_hierarchy")
     private List<String> categoriesHierarchy;
+    @Field("unknown_ingredients_n")
     @JsonProperty("unknown_ingredients_n")
     private int unknownIngredientsN;
+    @Field("nutrition_grades_tags")
     @JsonProperty("nutrition_grades_tags")
     private List<String> nutritionGradesTags;
+    @Field("emb_codes_20141016")
     @JsonProperty("emb_codes_20141016")
     private String embCodes20141016;
+    @Field("nova_groups")
     @JsonProperty("nova_groups")
     private String novaGroups;
     private String quantity;
+    @Field("ingredients_text")
     @JsonProperty("ingredients_text")
     private String ingredientsText;
+    @Field("ingredients_from_or_that_may_be_from_palm_oil_n")
     @JsonProperty("ingredients_from_or_that_may_be_from_palm_oil_n")
     private int ingredientsFromOrThatMayBeFromPalmOilN;
+    @Field("codes_tags")
     @JsonProperty("codes_tags")
     private List<String> codesTags;
     private Nutriments nutriments;
+    @Field("nutrition_data_prepared_per")
     @JsonProperty("nutrition_data_prepared_per")
     private String nutritionDataPreparedPer;
     private String lc;
+    @Field("countries_tags")
     @JsonProperty("countries_tags")
     private List<String> countriesTags;
+    @Field("emb_codes_orig")
     @JsonProperty("emb_codes_orig")
     private String embCodesOrig;
+    @Field("additives_tags")
     @JsonProperty("additives_tags")
     private List<String> additivesTags;
+    @Field("ingredients_text_with_allergens")
     @JsonProperty("ingredients_text_with_allergens")
     private String ingredientsTextWithAllergens;
+    @Field("image_thumb_url")
     @JsonProperty("image_thumb_url")
     private String imageThumbUrl;
+    @Field("ingredients_n")
     @JsonProperty("ingredients_n")
     private String ingredientsN;
+    @Field("additives_original_tags")
     @JsonProperty("additives_original_tags")
     private List<String> additivesOriginalTags;
     @JsonProperty("_id")
     private String Id;
+    @Field("pnns_groups_2_tags")
     @JsonProperty("pnns_groups_2_tags")
     private List<String> pnnsGroups2Tags;
+    @Field("fruitNvegetableNnuts_100g_estimate")
     @JsonProperty("fruitNvegetableNnuts_100g_estimate")
     private int fruitNvegetableNnuts100gEstimate;
+    @Field("minerals_tags")
     @JsonProperty("minerals_tags")
     private List<String> mineralsTags;
     private Images images;
+    @Field("completed_t")
     @JsonProperty("completed_t")
     private int completedT;
+    @Field("origins_debug_tags")
     @JsonProperty("origins_debug_tags")
     private List<String> originsDebugTags;
+    @Field("ingredients_text_debug")
     @JsonProperty("ingredients_text_debug")
     private String ingredientsTextDebug;
     private String states;
+    @Field("labels_tags")
     @JsonProperty("labels_tags")
     private List<String> labelsTags;
+    @Field("labels_hierarchy")
     @JsonProperty("labels_hierarchy")
     private List<String> labelsHierarchy;
+    @Field("amino_acids_tags")
     @JsonProperty("amino_acids_tags")
     private List<String> aminoAcidsTags;
+    @Field("emb_codes")
     @JsonProperty("emb_codes")
     private String embCodes;
+    @Field("image_nutrition_thumb_url")
     @JsonProperty("image_nutrition_thumb_url")
     private String imageNutritionThumbUrl;
     private int sortkey;
+    @Field("image_front_small_url")
     @JsonProperty("image_front_small_url")
     private String imageFrontSmallUrl;
+    @Field("packaging_debug_tags")
     @JsonProperty("packaging_debug_tags")
     private List<String> packagingDebugTags;
+    @Field("image_ingredients_url")
     @JsonProperty("image_ingredients_url")
     private String imageIngredientsUrl;
+    @Field("additives_n")
     @JsonProperty("additives_n")
     private int additivesN;
+    @Field("traces_debug_tags")
     @JsonProperty("traces_debug_tags")
     private List<String> tracesDebugTags;
+    @Field("checkers_tags")
     @JsonProperty("checkers_tags")
     private List<String> checkersTags;
+    @Field("last_image_t")
     @JsonProperty("last_image_t")
     private int lastImageT;
+    @Field("categories_debug_tags")
     @JsonProperty("categories_debug_tags")
     private List<String> categoriesDebugTags;
+    @Field("allergens_from_ingredients")
     @JsonProperty("allergens_from_ingredients")
     private String allergensFromIngredients;
+    @Field("categories_tags")
     @JsonProperty("categories_tags")
     private List<String> categoriesTags;
+    @Field("product_quantity")
     @JsonProperty("product_quantity")
     private int productQuantity;
     private String categories;
+    @Field("allergens_hierarchy")
     @JsonProperty("allergens_hierarchy")
     private List<String> allergensHierarchy;
+    @Field("last_modified_by")
     @JsonProperty("last_modified_by")
     private String lastModifiedBy;
+    @Field("ingredients_from_palm_oil_tags")
     @JsonProperty("ingredients_from_palm_oil_tags")
     private List<String> ingredientsFromPalmOilTags;
+    @Field("unknown_nutrients_tags")
     @JsonProperty("unknown_nutrients_tags")
     private List<String> unknownNutrientsTags;
     public void setIngredientsNTags(List<String> ingredientsNTags) {
@@ -1638,4 +1800,7 @@ public class Product {
          return unknownNutrientsTags;
      }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
 }

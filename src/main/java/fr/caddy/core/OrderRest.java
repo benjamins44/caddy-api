@@ -67,7 +67,7 @@ public class OrderRest {
 
         final List<Product> products = productService.getAll(customer);
         for (Product product: products) {
-            productInstanceService.refresh(product.getProductInstances().get(0));
+            productInstanceService.refresh(product.getFavorite());
         }
     }
 }

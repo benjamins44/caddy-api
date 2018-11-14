@@ -23,8 +23,8 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private CounterDao counterDao;
 
-    @Autowired
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
+
+    //private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
     public List<User> getAll() {
@@ -33,25 +33,28 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getById(Long id) {
-        return userDao.findById(id).get();
+        final User user = userDao.findById(id).get();
+        return user;
     }
 
     @Override
     public User getByLogin(String login) {
-        return userDao.findByLogin(login);
+        final User user = userDao.findByLogin(login);
+        System.out.println(user.getPasswordCoursesU());
+        return user;
     }
 
     @Override
     public User update(User user) {
+        //user.setPasswordCoursesU(bCryptPasswordEncoder.encode(user.getPasswordCoursesU()));
         System.out.println(user.getPasswordCoursesU());
-        user.setPasswordCoursesU(bCryptPasswordEncoder.encode(user.getPasswordCoursesU()));
         return userDao.save(user);
     }
 
     @Override
     public User create(User user) {
         user.setId(counterDao.getNextSequence(User.COLLECTION_NAME));
-        user.setPasswordCoursesU(bCryptPasswordEncoder.encode(user.getPasswordCoursesU()));
+        //user.setPasswordCoursesU(bCryptPasswordEncoder.encode(user.getPasswordCoursesU()));
         return userDao.save(user);
     }
 

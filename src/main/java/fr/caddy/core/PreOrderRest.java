@@ -61,7 +61,7 @@ public class PreOrderRest {
             final List<BasketPurchase> basket = new ArrayList<>();
             for (Product product : preOrder.getProducts()) {
                 BasketPurchase basketPurchase = new BasketPurchase();
-                ProductShop productShop = product.getProductInstances().get(0).getProductShops().get(0);
+                ProductShop productShop = product.getFavorite().getProductShops().get(0);
                 basketPurchase.setIdProduct(productShop.getId());
                 basketPurchase.setLabel(productShop.getLabel());
                 basketPurchase.setQuantity(product.getQuantity());

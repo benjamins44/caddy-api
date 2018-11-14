@@ -31,6 +31,16 @@ public class HistoryURest {
         historyUservice.getNewHistory(customer, password, orderId);
     }
 
+    @RequestMapping("/off")
+    public void off(final Long orderId) {
+
+        final User user = userDao.findByLogin("bcorre");
+        String customer = user.getLoginCoursesU();
+        String password = user.getPasswordCoursesU();
+        historyUservice.offCoursesUId(customer, password);
+    }
+
+
     @GetMapping("/orders/{customer}")
     public List<HistoryOrder> findAll(@PathVariable String customer) {
         return historyUservice.findAll(customer);

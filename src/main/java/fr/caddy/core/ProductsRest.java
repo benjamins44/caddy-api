@@ -1,6 +1,7 @@
 package fr.caddy.core;
 
 import fr.caddy.common.bean.Product;
+import fr.caddy.common.bean.ProductInstance;
 import fr.caddy.common.constants.Constants;
 import fr.caddy.core.service.ProductInstanceService;
 import fr.caddy.core.service.ProductService;
@@ -43,6 +44,15 @@ public class ProductsRest {
         product.setId(id);
         return productService.update(product);
     }
+    @RequestMapping(value="{id}", method = RequestMethod.PATCH)
+    public Product updateFavorite(@PathVariable("id") Long id, @RequestBody ProductInstance favorite) {
+        final Product product = this.getById(id);
+        product.setFavorite(favorite);
+        productService.calculateBestSubstitutes(product);
+        productService.update(product);
+        return product;
+    }
+
     @RequestMapping(method = RequestMethod.POST)
     public Product create(@RequestBody Product product) {
         return productService.create(product);
@@ -58,8 +68,8 @@ public class ProductsRest {
     public void refresh() {
         List<Product> products = this.get();
         for (Product product: products) {
-            productInstanceService.refresh(product.getProductInstances().get(0));
-            productService.getOrSave(product.getProductInstances().get(0), Constants.SIGN_U);
+            productInstanceService.refresh(product.getFavorite());
+            productService.getOrSave(product.getFavorite(), Constants.SIGN_U);
         }
     }
 

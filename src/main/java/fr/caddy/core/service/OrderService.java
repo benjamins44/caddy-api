@@ -3,6 +3,7 @@ package fr.caddy.core.service;
 import fr.caddy.common.bean.HistoryOrder;
 import fr.caddy.common.bean.Order;
 import fr.caddy.common.bean.Product;
+import fr.caddy.common.bean.ProductInstance;
 
 import java.util.List;
 
@@ -22,5 +23,6 @@ public interface OrderService {
      * @return
      */
     public Order getById(Long id);
+    public void refreshProductInstance(ProductInstance productInstance);
 
 }

@@ -2,6 +2,7 @@ package fr.caddy.core.service;
 
 import fr.caddy.common.bean.HistoryOrderProduct;
 import fr.caddy.common.bean.ProductInstance;
+import fr.caddy.common.bean.opendfoodfact.ProductsU;
 
 import java.util.List;
 
@@ -18,10 +19,13 @@ public interface ProductInstanceService {
      * @param productInstance
      */
     public Integer refresh(ProductInstance productInstance);
+    public Integer refresh(ProductInstance productInstance, ProductsU productOpen);
+    public void refreshAll();
     /**
      * Refresh product instance and all depedencies
      * @param productInstance
      */
+    public void refreshAndUpdateDepedencies(ProductInstance productInstance, ProductsU productsU);
     public void refreshAndUpdateDepedencies(ProductInstance productInstance);
 
     /**

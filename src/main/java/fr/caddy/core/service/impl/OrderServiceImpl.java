@@ -111,5 +111,23 @@ public class OrderServiceImpl implements OrderService {
         return orderDao.findById(id).get();
     }
 
+    /**
+     * Refresh product instance of all products
+     * @param productInstance
+     */
+    @Override
+    public void refreshProductInstance(ProductInstance productInstance) {
+        List<Order> orders = orderDao.findByIdProductInstance(productInstance.getId());
+        for (Order order: orders) {
+            for (Product product: order.getProducts()) {
+                if (product.getFavorite().getId().equals(productInstance.getId())) {
+                    // refresh productInstance into product
+                    product.setFavorite(productInstance);
+                }
+            }
+            // save it
+            orderDao.save(order);
+        }
+    }
 
 }

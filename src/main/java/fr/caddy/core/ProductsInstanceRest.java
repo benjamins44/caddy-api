@@ -1,11 +1,14 @@
 package fr.caddy.core;
 
+import com.sun.javafx.scene.control.behavior.OptionalBoolean;
 import fr.caddy.common.bean.ProductInstance;
 import fr.caddy.core.service.ProductInstanceService;
+import fr.caddy.core.service.ProductsGroupingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.logging.Logger;
 
 @RestController
@@ -18,15 +21,23 @@ public class ProductsInstanceRest {
     @Autowired
     private ProductInstanceService productInstanceService;
 
+    @Autowired
+    private ProductsGroupingService productsGroupingService;
+
     @GetMapping
     public List<ProductInstance> get() {
         return productInstanceService.getAll();
 
     }
     @RequestMapping(value="query", method = RequestMethod.GET)
-    public List<ProductInstance> getByLabeLike(@RequestParam("label") String label) {
-        return productInstanceService.getByLabeLike(label);
-
+    public List<ProductInstance> getByLabeLike(@RequestParam("label") String label, @RequestParam("refresh") Optional<Boolean> refresh) {
+        if (refresh.isPresent() && refresh.get()) {
+            productsGroupingService.autoCreateAll();
+        }
+        if (label != null) {
+            return productInstanceService.getByLabeLike(label);
+        }
+        return null;
     }
     @RequestMapping(value="{id}", method = RequestMethod.GET)
     public ProductInstance getById(@PathVariable("id") Long id) {
@@ -38,10 +49,11 @@ public class ProductsInstanceRest {
         ProductInstance productInstance = productInstanceService.getById(id);
         if (refresh) {
             productInstance.setOpenFoodFactId(ean);
-            productInstanceService.refresh(productInstance);
+            productInstanceService.refreshAndUpdateDepedencies(productInstance);
         }
         return productInstance;
     }
+
 
     @RequestMapping(value="{id}", method = RequestMethod.PUT)
     public ProductInstance update(@PathVariable("id") Long id, @RequestBody ProductInstance productInstance) {

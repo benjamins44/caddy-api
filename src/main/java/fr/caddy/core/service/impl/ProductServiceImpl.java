@@ -5,12 +5,11 @@ import fr.caddy.common.helpers.UtilsHelper;
 import fr.caddy.core.dao.CounterDao;
 import fr.caddy.core.dao.ProductDao;
 import fr.caddy.core.service.ProductService;
+import fr.caddy.core.service.ProductsGroupingService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 
-import java.text.NumberFormat;
 import java.time.LocalDate;
 import java.time.temporal.WeekFields;
 import java.util.*;
@@ -21,6 +20,9 @@ public class ProductServiceImpl implements ProductService {
 
     @Autowired
     private ProductDao productDao;
+
+    @Autowired
+    private ProductsGroupingService productsGroupingService;
 
     @Autowired
     private CounterDao counterDao;
@@ -43,7 +45,10 @@ public class ProductServiceImpl implements ProductService {
         if (product == null) {
             // create it
             product = new Product();
-            product.setProductInstances(new ArrayList<>());
+            product.setSubstitutes(new ArrayList<>());
+            product.setBestSubstitutes(new ArrayList<>());
+            product.setHistories(new ArrayList<>());
+            product.setFavorite(productInstance);
             product.setConsumption(new Consumption());
             product.getConsumption().setDayQuantity(new ArrayList<>());
             product.getConsumption().setMonth(new ArrayList<>());
@@ -53,24 +58,36 @@ public class ProductServiceImpl implements ProductService {
             BeanUtils.copyProperties(productInstance, product);
             // generate Id
             product.setId(counterDao.getNextSequence(Product.COLLECTION_NAME));
-            // create product shop
-            product.getProductInstances().add(productInstance);
-            productInstance.setPriority(1);
+            // calculate best substitute
+            this.calculateBestSubstitutes(product);
             // save it
             productDao.save(product);
         } else {
             // refresh productInstance into product
-            this.removeProductInstances(product, productInstance);
-            product.getProductInstances().add(productInstance);
-            product.setCustomer(customer);
-            // set default image
-            if (StringUtils.isEmpty(product.getImage())) {
-                product.setImage(productInstance.getImage());
-            }
+            product.setFavorite(productInstance);
             // save it
             productDao.save(product);
         }
         return product;
+    }
+
+    public void calculateBestSubstitutes(Product product) {
+        final Optional<ProductsGrouping> opProductsGrouping =  productsGroupingService.getByCategories(product.getCategory());
+        if (opProductsGrouping.isPresent()) {
+            ProductsGrouping productsGrouping = opProductsGrouping.get();
+            final List<ProductInstance> bestSubstitutes = new ArrayList<>();
+            for (ProductInstance  productInstance :productsGrouping.getBestProductInstance()) {
+                if (!productInstance.getId().equals(product.getFavorite().getId()) &&
+                        ( product.getFavorite().getFoodScore().getTotal() == null || (productInstance.getFoodScore().getTotal() != null &&
+                         productInstance.getFoodScore().getTotal() < product.getFavorite().getFoodScore().getTotal()))) {
+                    bestSubstitutes.add(productInstance);
+                }
+            }
+            final List<ProductInstance> finalBestSubstitutes = bestSubstitutes.stream().sorted((o1, o2) -> {
+                return o1.getFoodScore().getTotal() - o2.getFoodScore().getTotal();
+            }).collect(Collectors.toList());
+            product.setBestSubstitutes(finalBestSubstitutes);
+        }
     }
 
     /**
@@ -138,8 +155,9 @@ public class ProductServiceImpl implements ProductService {
         List<Product> products = productDao.findByIdProductInstance(productInstance.getId());
         for (Product product: products) {
             // refresh productInstance into product
-            this.removeProductInstances(product, productInstance);
-            product.getProductInstances().add(productInstance);
+            product.setFavorite(productInstance);
+            // calculate best subsitute
+            this.calculateBestSubstitutes(product);
             // save it
             productDao.save(product);
         }
@@ -322,14 +340,4 @@ public class ProductServiceImpl implements ProductService {
         productDao.save(product);
     }
 
-
-
-    private void removeProductInstances(Product product, ProductInstance productInstance) {
-        for (ProductInstance productInstanceCurrent : product.getProductInstances()) {
-            if (productInstanceCurrent.getId().equals(productInstance.getId())) {
-                product.getProductInstances().remove(productInstanceCurrent);
-                return;
-            }
-        }
-    }
 }

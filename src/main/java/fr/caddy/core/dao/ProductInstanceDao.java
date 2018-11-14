@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface ProductInstanceDao extends MongoRepository<ProductInstance, Long>, ProductInstanceCustomDao {
 
-    public Product findByOpenFoodFactId(Long openFoodFactId);
+    public ProductInstance findByOpenFoodFactId(Long openFoodFactId);
 
     public List<ProductInstance> findByLabelContainingIgnoreCase(String likeLabel);
 

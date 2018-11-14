@@ -6,15 +6,15 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /* Time: 2018-10-07 17:37:11 @author freecodeformat.com @website http://www.freecodeformat.com/json2javabean.php */
 public class ProductOpenFoodFact {
 
-    private Product product;
+    private ProductsU product;
     private String code;
     private int status;
     @JsonProperty("status_verbose")
     private String statusVerbose;
-    public void setProduct(Product product) {
+    public void setProduct(ProductsU product) {
          this.product = product;
      }
-     public Product getProduct() {
+     public ProductsU getProduct() {
          return product;
      }
 

@@ -35,7 +35,7 @@ public interface ProductService {
     public Product getById(Long id);
 
     /**
-     * Update Product
+     * Update ProductsU
      * @param product
      */
     public Product update(Product product);
@@ -74,4 +74,6 @@ public interface ProductService {
 
     public void calculateProbabilities(List<Product> products);
     public void calculateProbabilities(Product product);
+
+    public void calculateBestSubstitutes(Product product);
 }

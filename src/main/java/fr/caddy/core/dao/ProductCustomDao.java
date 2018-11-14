@@ -10,4 +10,7 @@ public interface ProductCustomDao {
 
     public List<Product> findByOrderIdAndProduct(Long orderId, Long productId);
 
+    public List<Product> findByLabelContainingIgnoreCase(String likeLabel);
+
+
 }

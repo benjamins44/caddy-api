@@ -6,7 +6,7 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import java.time.LocalDate;
 import java.util.List;
 
-public interface OrderDao extends MongoRepository<Order, Long> {
+public interface OrderDao extends MongoRepository<Order, Long>, OrderCustomDao  {
 
     public List<Order> findByCustomer(String customer);
 

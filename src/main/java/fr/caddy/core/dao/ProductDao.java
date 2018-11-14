@@ -10,6 +10,5 @@ public interface ProductDao extends MongoRepository<Product, Long>, ProductCusto
 
     public List<Product> findByCustomer(String customer);
 
-    public List<Product> findByLabelContainingIgnoreCase(String likeLabel);
 
 }
