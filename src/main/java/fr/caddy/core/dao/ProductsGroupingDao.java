@@ -8,5 +8,5 @@ import java.util.Optional;
 
 public interface ProductsGroupingDao extends MongoRepository<ProductsGrouping, Long> {
 
-    public Optional<ProductsGrouping> findByCategories(String categories);
+    public Optional<ProductsGrouping> findByCategories(List<String> categories);
 }

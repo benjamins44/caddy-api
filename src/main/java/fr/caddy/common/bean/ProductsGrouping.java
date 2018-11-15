@@ -13,7 +13,7 @@ public class ProductsGrouping {
     @Id
     protected Long id;
     protected LocalDate date;
-    protected String categories;
+    protected List<String> categories;
     protected List<ProductInstance> productInstance = new ArrayList<>();
     protected List<ProductInstance> bestProductInstance = new ArrayList<>();
 
@@ -33,11 +33,11 @@ public class ProductsGrouping {
         this.date = date;
     }
 
-    public String getCategories() {
+    public List<String> getCategories() {
         return categories;
     }
 
-    public void setCategories(String categories) {
+    public void setCategories(List<String> categories) {
         this.categories = categories;
     }
 
@@ -60,7 +60,7 @@ public class ProductsGrouping {
     @Override
     public String toString() {
         return String.format(
-                "%s[id=%s, date=%s, categories='%s', productInstance=%s, bestProductInstance=%s ]",
+                "%s[id=%s, date=%s, categories=%s, productInstance=%s, bestProductInstance=%s ]",
                 COLLECTION_NAME, id, date, categories, productInstance, bestProductInstance);
     }
 }

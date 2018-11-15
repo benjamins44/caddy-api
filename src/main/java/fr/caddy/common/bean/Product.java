@@ -19,8 +19,6 @@ public class Product {
 
     private String family;
 
-    private String category;
-
     private String dlc;
 
     private Float quantity;
@@ -41,13 +39,6 @@ public class Product {
     }
     public void setFamily(String family) {
         this.family = family;
-    }
-
-    public String getCategory() {
-        return category;
-    }
-    public void setCategory(String category) {
-        this.category = category;
     }
 
     public String getDlc() {
@@ -152,7 +143,7 @@ public class Product {
     @Override
     public String toString() {
         return String.format(
-                "%s[id=%s, customer='%s', type='%s', family='%s', category='%s', quantity=%s, dlc='%s', status='%', orderStatus='%s', consumption=%s, substitutes=%s, favorite=%s, histories=%s, bestSubstitutes=%s ]",
-                COLLECTION_NAME, id, customer, type, family, category, quantity, dlc, status, orderStatus, consumption, substitutes, favorite, histories, bestSubstitutes);
+                "%s[id=%s, customer='%s', type='%s', family='%s', quantity=%s, dlc='%s', status='%', orderStatus='%s', consumption=%s, substitutes=%s, favorite=%s, histories=%s, bestSubstitutes=%s ]",
+                COLLECTION_NAME, id, customer, type, family, quantity, dlc, status, orderStatus, consumption, substitutes, favorite, histories, bestSubstitutes);
     }
 }

@@ -42,7 +42,7 @@ public class ProductsGroupingServiceImpl implements ProductsGroupingService {
     }
 
     @Override
-    public Optional<ProductsGrouping> getByCategories(String categories) {
+    public Optional<ProductsGrouping> getByCategories(List<String> categories) {
         return productsGroupingDao.findByCategories(categories);
     }
 
@@ -87,14 +87,14 @@ public class ProductsGroupingServiceImpl implements ProductsGroupingService {
         // grouping by categories
         final List<ProductInstance> productInstances = productInstanceService.getAll();
         for (ProductInstance productInstance: productInstances) {
-            if (!StringUtils.isEmpty(productInstance.getCategory())) {
+            if (!StringUtils.isEmpty(productInstance.getCategories())) {
                 // group by categories
-                Optional<ProductsGrouping> optProductsGrouping = this.productsGroupingDao.findByCategories(productInstance.getCategory());
+                Optional<ProductsGrouping> optProductsGrouping = this.productsGroupingDao.findByCategories(productInstance.getCategories());
                 ProductsGrouping productsGrouping = null;
                 if (!optProductsGrouping.isPresent()) {
                     productsGrouping = new ProductsGrouping();
                     productsGrouping.setProductInstance(new ArrayList<>());
-                    productsGrouping.setCategories(productInstance.getCategory());
+                    productsGrouping.setCategories(productInstance.getCategories());
                     productsGrouping = this.create(productsGrouping);
                 } else {
                     productsGrouping = optProductsGrouping.get();

@@ -65,7 +65,6 @@ public class ProductInstanceServiceImpl implements ProductInstanceService {
         if (productInstance == null) {
             // create it
             productInstance = new ProductInstance();
-            productInstance.setCategory(historyOrderproduct.getCategory());
             productInstance.setProductShops(new ArrayList<ProductShop>());
             // copy property
             BeanUtils.copyProperties(historyOrderproduct, productInstance);
@@ -120,9 +119,8 @@ public class ProductInstanceServiceImpl implements ProductInstanceService {
                 result++;
             }
             // category
-            if (!StringUtils.isEmpty(productOpen.getCategories())
-                && !productOpen.getCategories().equals(productInstance.getCategory())) {
-                productInstance.setCategory(productOpen.getCategories());
+            if (!StringUtils.isEmpty(productOpen.getCategoriesHierarchy())) {
+                productInstance.setCategories(productOpen.getCategoriesHierarchy());
                 result++;
             }
             // nova

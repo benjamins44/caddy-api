@@ -72,7 +72,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     public void calculateBestSubstitutes(Product product) {
-        final Optional<ProductsGrouping> opProductsGrouping =  productsGroupingService.getByCategories(product.getCategory());
+        final Optional<ProductsGrouping> opProductsGrouping =  productsGroupingService.getByCategories(product.getFavorite().getCategories());
         if (opProductsGrouping.isPresent()) {
             ProductsGrouping productsGrouping = opProductsGrouping.get();
             final List<ProductInstance> bestSubstitutes = new ArrayList<>();

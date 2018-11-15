@@ -17,7 +17,7 @@ public class ProductInstance {
     private String brand; // brands
     private String label;
     private String label2; // product_name
-    private String category; // categories
+    private List<String> categories; // categories_hierarchy
     private Integer priority;
     private Long openFoodFactId;
     private Integer nova;
@@ -38,12 +38,12 @@ public class ProductInstance {
     private Integer complete;
 
 
-    public String getCategory() {
-        return category;
+    public List<String> getCategories() {
+        return categories;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
+    public void setCategories(List<String> category) {
+        this.categories = category;
     }
 
     public String getBrand() {
@@ -217,9 +217,9 @@ public class ProductInstance {
     @Override
     public String toString() {
         return String.format(
-                "%s[id=%s, quantity=%s, unit='%s', brand='%s', label='%s', label2='%s', priority=%s, openFoodFactId=%s, nova=%s, nutriscore='%s', image='%s', productShops=%s, category=%s, unitWeight=%s, totalWeight=%s, unitCount=%s, " +
+                "%s[id=%s, quantity=%s, unit='%s', brand='%s', label='%s', label2='%s', priority=%s, openFoodFactId=%s, nova=%s, nutriscore='%s', image='%s', productShops=%s, categories=%s, unitWeight=%s, totalWeight=%s, unitCount=%s, " +
                         "ingredientsList='%s', allergens=%s, traces=%s, nutrientsLevel=%s, additives=%s, foodScore=%s, complete=%s ]",
-                COLLECTION_NAME, id, quantity, unit, brand, label, label2, priority, openFoodFactId, nova, nutriscore, image, productShops, category, unitWeight, totalWeight, unitCount,
+                COLLECTION_NAME, id, quantity, unit, brand, label, label2, priority, openFoodFactId, nova, nutriscore, image, productShops, categories, unitWeight, totalWeight, unitCount,
                 ingredientsList, allergens, traces, nutrientsLevel, additives, foodScore, complete);
     }
 }

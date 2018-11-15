@@ -9,7 +9,7 @@ public interface ProductsGroupingService {
 
     public List<ProductsGrouping> getAll();
     public ProductsGrouping getById(Long id);
-    public Optional<ProductsGrouping> getByCategories(String categories);
+    public Optional<ProductsGrouping> getByCategories(List<String> categories);
     public ProductsGrouping update(ProductsGrouping productsGrouping);
     public void delete(ProductsGrouping productsGrouping);
     public List<ProductsGrouping> save(List<ProductsGrouping> productsGroupings);

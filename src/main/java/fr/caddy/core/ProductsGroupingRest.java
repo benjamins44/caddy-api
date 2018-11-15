@@ -25,7 +25,7 @@ public class ProductsGroupingRest {
     }
 
     @RequestMapping(value="query", method = RequestMethod.GET)
-    public Optional<ProductsGrouping> getByCategories(@RequestParam("categories") String categories) {
+    public Optional<ProductsGrouping> getByCategories(@RequestParam("categories") List<String> categories) {
         return productsGroupingService.getByCategories(categories);
 
     }
