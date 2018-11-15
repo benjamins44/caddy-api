@@ -69,7 +69,8 @@ public class ProductsRest {
         List<Product> products = this.get();
         for (Product product: products) {
             productInstanceService.refresh(product.getFavorite());
-            productService.getOrSave(product.getFavorite(), Constants.SIGN_U);
+            productService.refresh(product);
+            LOG.info(String.format("%s: %s", product.getFavorite().getLabel(), product.getBestSubstitutes().size()));
         }
     }
 

@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 @Service
 public class ProductsGroupingServiceImpl implements ProductsGroupingService {
@@ -87,7 +88,7 @@ public class ProductsGroupingServiceImpl implements ProductsGroupingService {
         // grouping by categories
         final List<ProductInstance> productInstances = productInstanceService.getAll();
         for (ProductInstance productInstance: productInstances) {
-            if (!StringUtils.isEmpty(productInstance.getCategories())) {
+            if (!StringUtils.isEmpty(productInstance.getCategories()) && productInstance.getFoodScore() != null && productInstance.getFoodScore().getTotal() != null) {
                 // group by categories
                 Optional<ProductsGrouping> optProductsGrouping = this.productsGroupingDao.findByCategories(productInstance.getCategories());
                 ProductsGrouping productsGrouping = null;
@@ -104,35 +105,20 @@ public class ProductsGroupingServiceImpl implements ProductsGroupingService {
                 this.save(productsGrouping);
             }
         }
-        // for each productsµGrouping
+        // for each productsGrouping
         for (ProductsGrouping productsGrouping: this.productsGroupingDao.findAll()) {
-            // add best products
+            // sort productInstances by foodscore
+            productsGrouping.setProductInstance(
+                productsGrouping.getProductInstance().stream().sorted((o1, o2) -> o1.getFoodScore().getTotal() - o2.getFoodScore().getTotal()).collect(Collectors.toList())
+            );
+            ProductInstance best = productsGrouping.getProductInstance().get(0);
+            Integer bestScore = best.getFoodScore().getTotal();
+            Double maxScore = bestScore * 1.5;
+            // add best products by foodscore
             List<ProductInstance> bests = new ArrayList<>();
-            Integer bestLetterScore = 5;
             for (ProductInstance productInstance: productsGrouping.getProductInstance()) {
-                if (!StringUtils.isEmpty(productInstance.getNutriscore())) {
-                    Integer letterScore = 5;
-                    switch (productInstance.getNutriscore()) {
-                        case "a":
-                            letterScore = 1;
-                            break;
-                        case "b":
-                            letterScore = 2;
-                            break;
-                        case "c":
-                            letterScore = 3;
-                            break;
-                        case "d":
-                            letterScore = 4;
-                            break;
-                    }
-                    if (letterScore < bestLetterScore) {
-                        bests = new ArrayList<>();
-                    }
-                    if (letterScore <= bestLetterScore) {
-                        bests.add(productInstance);
-                        bestLetterScore = letterScore;
-                    }
+                if (productInstance.getFoodScore().getTotal() <= maxScore) {
+                    bests.add(productInstance);
                 }
             }
             productsGrouping.setBestProductInstance(bests);

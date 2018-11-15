@@ -76,4 +76,6 @@ public interface ProductService {
     public void calculateProbabilities(Product product);
 
     public void calculateBestSubstitutes(Product product);
+
+    public void refresh(Product product);
 }

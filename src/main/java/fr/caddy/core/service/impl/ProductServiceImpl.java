@@ -66,7 +66,7 @@ public class ProductServiceImpl implements ProductService {
             // refresh productInstance into product
             product.setFavorite(productInstance);
             // save it
-            productDao.save(product);
+            product = productDao.save(product);
         }
         return product;
     }
@@ -192,41 +192,44 @@ public class ProductServiceImpl implements ProductService {
         return this.calculateConsumptions(productCalculate.values().stream().collect(Collectors.toList()));
     }
 
+    public Product calculateConsumptions(Product product) {
+        final Map<Integer, Map<Integer, Float>> mapWeeklyQuantity = new HashMap<>();
+        WeekFields weekFields = WeekFields.of(Locale.getDefault());
+        for (DayQuantity dayQuantity : product.getConsumption().getDayQuantity()) {
+            final Integer week = dayQuantity.getDay().get(weekFields.weekOfWeekBasedYear());
+            final Integer year = dayQuantity.getDay().getYear();
+
+            Map<Integer, Float> mapWeek = mapWeeklyQuantity.get(year);
+            if (mapWeek == null) {
+                mapWeek = new HashMap<>();
+                mapWeeklyQuantity.put(year, mapWeek);
+            }
+
+            Float quantity = mapWeek.get(week);
+            if (quantity == null) {
+                quantity = 0F;
+            }
+            quantity += dayQuantity.getQuantity();
+            mapWeek.put(week, quantity);
+        }
+        final List<WeeklyQuantity> newWeekliesQuantity = new ArrayList<>();
+        for (Integer year: mapWeeklyQuantity.keySet()) {
+            for (Integer week: mapWeeklyQuantity.get(year).keySet()) {
+                final WeeklyQuantity weeklyQuantity = new WeeklyQuantity();
+                weeklyQuantity.setYear(year);
+                weeklyQuantity.setWeek(week);
+                weeklyQuantity.setQuantity(mapWeeklyQuantity.get(year).get(week));
+                newWeekliesQuantity.add(weeklyQuantity);
+            }
+        }
+        product.getConsumption().setWeeklyQuantity(newWeekliesQuantity);
+        // save it
+        return productDao.save(product);
+    }
     public List<Product> calculateConsumptions(List<Product> products) {
         // calculate weeklyQuantity
         for (Product product: products) {
-            final Map<Integer, Map<Integer, Float>> mapWeeklyQuantity = new HashMap<>();
-            WeekFields weekFields = WeekFields.of(Locale.getDefault());
-            for (DayQuantity dayQuantity : product.getConsumption().getDayQuantity()) {
-                final Integer week = dayQuantity.getDay().get(weekFields.weekOfWeekBasedYear());
-                final Integer year = dayQuantity.getDay().getYear();
-
-                Map<Integer, Float> mapWeek = mapWeeklyQuantity.get(year);
-                if (mapWeek == null) {
-                    mapWeek = new HashMap<>();
-                    mapWeeklyQuantity.put(year, mapWeek);
-                }
-
-                Float quantity = mapWeek.get(week);
-                if (quantity == null) {
-                    quantity = 0F;
-                }
-                quantity += dayQuantity.getQuantity();
-                mapWeek.put(week, quantity);
-            }
-            final List<WeeklyQuantity> newWeekliesQuantity = new ArrayList<>();
-            for (Integer year: mapWeeklyQuantity.keySet()) {
-                for (Integer week: mapWeeklyQuantity.get(year).keySet()) {
-                    final WeeklyQuantity weeklyQuantity = new WeeklyQuantity();
-                    weeklyQuantity.setYear(year);
-                    weeklyQuantity.setWeek(week);
-                    weeklyQuantity.setQuantity(mapWeeklyQuantity.get(year).get(week));
-                    newWeekliesQuantity.add(weeklyQuantity);
-                }
-            }
-            product.getConsumption().setWeeklyQuantity(newWeekliesQuantity);
-            // save it
-            productDao.save(product);
+            this.calculateConsumptions(product);
         }
         return products;
     }
@@ -338,6 +341,14 @@ public class ProductServiceImpl implements ProductService {
         product.getConsumption().setProbalilityBuy(UtilsHelper.castTwoDecimal(probability));
         product.getConsumption().setProbalilityQuantityBuy(UtilsHelper.castTwoDecimal(quantity));
         productDao.save(product);
+    }
+
+    public void refresh(Product product) {
+        this.calculateBestSubstitutes(product);
+        this.calculateConsumptions(product);
+        this.calculateAverage(product);
+        this.calculateProbabilities(product);
+        this .update(product);
     }
 
 }
