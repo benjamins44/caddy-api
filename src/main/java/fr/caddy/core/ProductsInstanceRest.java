@@ -1,6 +1,5 @@
 package fr.caddy.core;
 
-import com.sun.javafx.scene.control.behavior.OptionalBoolean;
 import fr.caddy.common.bean.ProductInstance;
 import fr.caddy.core.service.ProductInstanceService;
 import fr.caddy.core.service.ProductsGroupingService;
